@@ -15,6 +15,8 @@ TAGS_TEMPLATE_FILE = Path("templates/tags.html")
 STATIC_DIR = Path("static")
 
 SITE_DIR = Path("site")
+RICH_PAGES_DIR = Path("rich-pages")
+SPECIAL_OUTPUT_DIR = SITE_DIR / "special"
 ENTRY_OUTPUT_DIR = SITE_DIR / "entries"
 STATIC_OUTPUT_DIR = SITE_DIR / "static"
 
@@ -180,32 +182,90 @@ def build():
         title = str(metadata.get("title", "未命名记录"))
         date = str(metadata.get("date", ""))
         output_name = f"{markdown_file.stem}.html"
+        page_type = str(metadata.get("page_type", "markdown"))
+        custom_page = str(metadata.get("custom_page", "")).strip()
         categories = metadata.get("categories", [])
         tags = metadata.get("tags", [])
 
         categories_html = make_badges(categories, "category")
         tags_html = make_badges(tags, "tag")
 
-        body_html = markdown.markdown(content)
+        if page_type == "custom" and custom_page:
+            entry_url = custom_page.replace("\\", "/")
+            custom_path = Path(entry_url)
 
-        html = entry_template.replace("{{ title }}", escape(title))
-        html = html.replace("{{ date }}", escape(date))
-        html = html.replace("{{ categories }}", categories_html)
-        html = html.replace("{{ tags }}", tags_html)
-        html = html.replace("{{ content }}", body_html)
+            # special/games/... 对应 rich-pages/games/...
+            if custom_path.parts and custom_path.parts[0] == "special":
+                source_file = RICH_PAGES_DIR.joinpath(
+                    *custom_path.parts[1:]
+                )
+                source_folder = source_file.parent
+                output_folder = SITE_DIR / custom_path.parent
 
-        output_file = ENTRY_OUTPUT_DIR / output_name
-        output_file.write_text(html, encoding="utf-8")
+                if source_file.exists():
+                    shutil.copytree(
+                        source_folder,
+                        output_folder,
+                        dirs_exist_ok=True
+                    )
+
+                    # 给专题页注入「返回首页」导航
+                    home_link = (
+                        '<div style="text-align:center;'
+                        'margin:14px 0 4px">'
+                        '<a href="../../index.html" '
+                        'style="display:inline-block;'
+                        'background:linear-gradient(135deg,#0f172a,#334155);'
+                        'color:#fff;text-decoration:none;font-weight:700;'
+                        'padding:8px 22px;border-radius:22px;'
+                        'letter-spacing:1px;font-size:13px;'
+                        'box-shadow:0 3px 10px rgba(15,23,42,.18)">'
+                        '← 返回个人档案</a></div>'
+                    )
+                    for html_file in output_folder.rglob("*.html"):
+                        text = html_file.read_text(encoding="utf-8")
+                        if 'href="../../index.html"' in text:
+                            continue
+                        if "</body>" in text:
+                            text = text.replace(
+                                "</body>",
+                                f"{home_link}\n</body>"
+                            )
+                            html_file.write_text(text, encoding="utf-8")
+
+                    print(f"已复制并关联专题页：{entry_url}")
+                else:
+                    print(f"警告：找不到专题源文件：{source_file}")
+            else:
+                print(
+                    f"警告：custom_page 必须以 special/ 开头："
+                    f"{entry_url}"
+                )
+
+        else:
+            # 普通 Markdown 记录
+            body_html = markdown.markdown(content)
+
+            html = entry_template.replace("{{ title }}", escape(title))
+            html = html.replace("{{ date }}", escape(date))
+            html = html.replace("{{ categories }}", categories_html)
+            html = html.replace("{{ tags }}", tags_html)
+            html = html.replace("{{ content }}", body_html)
+
+            output_file = ENTRY_OUTPUT_DIR / output_name
+            output_file.write_text(html, encoding="utf-8")
+
+            entry_url = f"entries/{output_name}"
+
+            print(f"已生成：{output_file}")
 
         public_entries.append({
             "title": title,
             "date": date,
-            "url": f"entries/{output_name}",
+            "url": entry_url,
             "categories": categories,
-            "tags": tags
+            "tags": tags,
         })
-
-        print(f"已生成：{output_file}")
 
     # 按日期从新到旧排列
     public_entries.sort(
@@ -232,7 +292,7 @@ def build():
     archive_file.write_text(archive_html, encoding="utf-8")
 
     print(f"已生成月度归档：{archive_file}")
-   # 生成标签页面
+    # 生成标签页面
     tags_html = tags_template.replace(
         "{{ tags_content }}",
         make_tags_content(public_entries)

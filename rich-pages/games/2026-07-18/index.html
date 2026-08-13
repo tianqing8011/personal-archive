@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>天晴行会 · 诺维京守城战 · 作战简报</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,'Microsoft YaHei','微软雅黑',PingFang SC,sans-serif;
+  background:#edf0f7;color:#1e293b;font-size:14px;line-height:1.6;
+}
+.wrap{max-width:820px;margin:0 auto;padding:14px}
+
+/* HEADER */
+.hd{
+  background:linear-gradient(135deg,#0f172a,#1e293b 60%,#334155);
+  color:#fff;border-radius:14px;padding:18px 20px 16px;
+  margin-bottom:12px;position:relative;overflow:hidden;
+}
+.hd::after{
+  content:'⚔️';position:absolute;right:18px;top:50%;
+  transform:translateY(-50%);font-size:56px;opacity:.12;line-height:1;
+}
+.hd-guild{
+  font-size:11px;color:#94a3b8;background:rgba(255,255,255,.08);
+  padding:2px 10px;border-radius:20px;display:inline-block;
+  margin-bottom:8px;letter-spacing:2px;
+}
+.hd-title{font-size:20px;font-weight:900;letter-spacing:2px;margin-bottom:10px}
+.hd-meta{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:#94a3b8}
+
+/* ██ NOTICE BANNER ██ */
+.notice-banner{
+  background:linear-gradient(135deg,#fffbeb,#fef3c7);
+  border:1.5px solid #fcd34d;border-radius:12px;
+  padding:14px 16px;margin-bottom:12px;
+  box-shadow:0 2px 8px rgba(245,158,11,.12);
+}
+.notice-top{
+  display:flex;align-items:center;gap:8px;margin-bottom:10px;
+}
+.notice-icon{font-size:18px}
+.notice-title{font-size:14px;font-weight:900;color:#92400e;letter-spacing:1px}
+.notice-tag{
+  margin-left:auto;font-size:10px;background:#fcd34d;color:#78350f;
+  padding:2px 9px;border-radius:20px;font-weight:700;white-space:nowrap;
+}
+.notice-rows{display:flex;flex-direction:column;gap:8px}
+.notice-row{
+  display:flex;align-items:flex-start;gap:10px;
+  background:#fff;border-radius:9px;padding:9px 12px;
+  border-left:3px solid #f59e0b;
+}
+.nr-icon{font-size:16px;flex-shrink:0;margin-top:1px}
+.nr-body{}
+.nr-t{font-size:13px;font-weight:700;color:#92400e;margin-bottom:2px}
+.nr-d{font-size:12px;color:#78350f;line-height:1.5}
+.nr-d strong{color:#b45309}
+.nr-d em{font-style:normal;font-weight:700;color:#d97706;
+  background:#fef3c7;padding:1px 6px;border-radius:5px}
+.notice-footer{
+  margin-top:9px;padding-top:8px;border-top:1px dashed #fcd34d;
+  font-size:11.5px;color:#b45309;text-align:center;font-weight:500;
+}
+
+/* SECTION */
+.sec{background:#fff;border-radius:12px;margin-bottom:12px;
+  box-shadow:0 1px 5px rgba(0,0,0,.06),0 0 0 1px rgba(0,0,0,.03);overflow:hidden}
+.sec-hd{
+  padding:11px 16px;font-size:14px;font-weight:800;
+  display:flex;align-items:center;gap:7px;
+  border-bottom:1px solid #f1f5f9;background:#fafbff;letter-spacing:1px;
+}
+.sec-bd{padding:14px 16px}
+
+/* CMD */
+.cmd-top{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+.cmd-card{flex:1;min-width:130px;background:#f8fafc;border-radius:9px;padding:9px 12px;border-left:3px solid #e2e8f0}
+.cmd-card.total{border-left-color:#f59e0b;background:#fffbf0}
+.cmd-card.vice{border-left-color:#8b5cf6}
+.cmd-card.meet{border-left-color:#3b82f6}
+.cmd-lbl{font-size:10px;color:#94a3b8;letter-spacing:2px;margin-bottom:3px}
+.cmd-name{font-size:14px;font-weight:700}
+.cmd-sub{font-size:11px;color:#64748b;margin-top:2px}
+
+.cap-row{display:flex;gap:6px;flex-wrap:wrap}
+.cap{display:flex;align-items:center;gap:5px;padding:5px 10px;
+  border-radius:8px;border:1px solid #e2e8f0;flex:1;min-width:120px;background:#f8fafc}
+.cap-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.cap-name{font-size:12.5px;font-weight:700;flex:1}
+.cap-zone{font-size:10px;color:#94a3b8;text-align:right;white-space:nowrap}
+
+/* STRAT */
+.strat-list{display:flex;flex-direction:column;gap:10px}
+.si{display:flex;gap:10px;align-items:flex-start}
+.si-num{
+  width:24px;height:24px;background:#1e293b;color:#fff;
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:800;flex-shrink:0;margin-top:2px;
+}
+.si-t{font-size:13.5px;font-weight:700;margin-bottom:2px}
+.si-d{font-size:12px;color:#475569;line-height:1.5}
+
+/* DISCIPLINE */
+.disc-list{display:flex;flex-direction:column;gap:7px}
+.di{display:flex;gap:10px;align-items:flex-start;padding:8px 11px;border-radius:8px;background:#f8fafc}
+.di-mark{
+  width:22px;height:22px;background:#fef2f2;border:1.5px solid #fecaca;
+  color:#dc2626;border-radius:50%;display:flex;align-items:center;
+  justify-content:center;font-size:10px;font-weight:800;flex-shrink:0;margin-top:2px;
+}
+.di-t{font-size:13px;color:#334155;line-height:1.5}
+.di-t strong{color:#dc2626}
+.di-t em{color:#d97706;font-style:normal;font-weight:600}
+
+/* TIMELINE */
+.tl{position:relative;padding-left:20px}
+.tl::before{
+  content:'';position:absolute;left:6px;top:12px;bottom:12px;width:2px;
+  background:linear-gradient(180deg,#f59e0b 0%,#ef4444 45%,#8b5cf6 75%,#22c55e 100%);
+  border-radius:2px;
+}
+.tli{position:relative;margin-bottom:13px;padding-left:14px}
+.tli:last-child{margin-bottom:0}
+.tli-dot{
+  position:absolute;left:-14px;top:7px;width:10px;height:10px;
+  border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1.5px rgba(0,0,0,.12);
+}
+.tli-time{font-size:11px;font-weight:700;color:#94a3b8;margin-bottom:1px}
+.tli-t{font-size:13.5px;font-weight:700;margin-bottom:2px}
+.tli-d{font-size:12px;color:#475569}
+.tli-key{color:#ef4444;font-weight:600}
+.tli-notice{
+  display:inline-block;margin-top:4px;background:#fef3c7;
+  color:#92400e;border:1px solid #fcd34d;border-radius:6px;
+  padding:3px 9px;font-size:11.5px;font-weight:600;
+}
+
+/* TEAM CARDS */
+.grp-sec{padding:12px 12px}
+.t-card{background:#fff;border-radius:12px;box-shadow:0 1px 5px rgba(0,0,0,.06);overflow:hidden}
+.t-hd{padding:10px 14px;display:flex;align-items:center;gap:8px;border-bottom:1px solid rgba(0,0,0,.04)}
+.t-dot{width:11px;height:11px;border-radius:50%;flex-shrink:0}
+.t-name{font-size:14px;font-weight:800}
+.t-sub{font-size:10.5px;opacity:.5;margin-left:2px}
+.t-stat{margin-left:auto;font-size:11px;color:#94a3b8;white-space:nowrap}
+
+.lead-blk{
+  display:flex;gap:6px;padding:7px 14px;
+  background:rgba(0,0,0,.015);border-bottom:1px solid rgba(0,0,0,.04);flex-wrap:wrap;
+}
+.lead-item{
+  display:flex;align-items:center;gap:5px;padding:4px 9px;
+  background:#fff;border-radius:7px;border:1px solid #eaecf0;flex:1;min-width:110px;
+}
+.lead-lbl{font-size:10px;color:#94a3b8;letter-spacing:1px;white-space:nowrap;flex-shrink:0}
+.lead-name{font-size:13px;font-weight:700}
+.lead-inf{font-size:10.5px;color:#64748b;margin-left:3px}
+
+.mems{padding:5px 0 7px}
+.mr{display:flex;align-items:center;gap:6px;padding:4px 14px}
+.mr:hover{background:#f8fafc}
+.m-n{font-size:10px;color:#cbd5e1;width:14px;text-align:right;flex-shrink:0}
+.m-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.m-name{font-size:12.5px;font-weight:600;color:#334155;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.m-tags{display:flex;align-items:center;gap:3px;flex-shrink:0;flex-wrap:nowrap}
+
+.t-foot{padding:6px 14px 8px;background:rgba(0,0,0,.015);border-top:1px solid rgba(0,0,0,.04);font-size:11px;color:#64748b}
+
+.gate-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+/* BADGES */
+.b{padding:1.5px 6px;border-radius:20px;font-size:10px;font-weight:600;white-space:nowrap;display:inline-block}
+.yuan{background:#eff6ff;color:#2563eb;border:1px solid #bfdbfe}
+.su{background:#f5f3ff;color:#7c3aed;border:1px solid #ddd6fe}
+.tong{background:#ecfeff;color:#0891b2;border:1px solid #a5f3fc}
+.an{background:#0f172a;color:#94a3b8}
+.mu{background:#fff7ed;color:#c2410c;border:1px solid #fed7aa}
+.li{background:#fefce8;color:#854d0e;border:1px solid #fef08a}
+.xian{background:#f0fdf4;color:#166534;border:1px solid #bbf7d0}
+.ye{background:#fef2f2;color:#b91c1c;border:1px solid #fecaca}
+.hun{background:#f9fafb;color:#6b7280;border:1px solid #e5e7eb}
+.she{background:#fdf2f8;color:#9d174d;border:1px solid #fbcfe8}
+.dual{background:#ede9fe;color:#6d28d9;border:1px solid #ddd6fe;font-size:9px}
+.lv{font-size:10.5px;color:#94a3b8}
+.st{color:#f59e0b;font-size:11px}
+
+/* TEAM THEMES */
+.central .t-hd{background:linear-gradient(90deg,#fffbf0,#fff);border-top:3px solid #f59e0b}
+.central .t-dot{background:#f59e0b}
+.central .t-name{color:#d97706}
+.central .m-dot{background:#fde68a}
+
+.se-t .t-hd{background:linear-gradient(90deg,#faf8ff,#fff);border-top:3px solid #8b5cf6}
+.se-t .t-dot{background:#8b5cf6}
+.se-t .t-name{color:#7c3aed}
+.se-t .m-dot{background:#ddd6fe}
+
+.ne-t .t-hd{background:linear-gradient(90deg,#eff8ff,#fff);border-top:3px solid #3b82f6}
+.ne-t .t-dot{background:#3b82f6}
+.ne-t .t-name{color:#2563eb}
+.ne-t .m-dot{background:#bfdbfe}
+
+.sw-t .t-hd{background:linear-gradient(90deg,#fff5f5,#fff);border-top:3px solid #ef4444}
+.sw-t .t-dot{background:#ef4444}
+.sw-t .t-name{color:#dc2626}
+.sw-t .m-dot{background:#fecaca}
+
+.nw-t .t-hd{background:linear-gradient(90deg,#f3fef6,#fff);border-top:3px solid #22c55e}
+.nw-t .t-dot{background:#22c55e}
+.nw-t .t-name{color:#16a34a}
+.nw-t .m-dot{background:#bbf7d0}
+
+.doc-foot{text-align:center;font-size:11.5px;color:#94a3b8;padding:10px 0 6px}
+.go-btn{
+  display:inline-block;margin-top:10px;
+  background:linear-gradient(135deg,#0f172a,#334155);
+  color:#fff;text-decoration:none;font-weight:800;
+  padding:10px 26px;border-radius:24px;letter-spacing:1px;
+  box-shadow:0 4px 12px rgba(15,23,42,.25);
+  transition:transform .15s ease,box-shadow .15s ease;
+}
+.go-btn:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(15,23,42,.3)}
+.go-btn:active{transform:translateY(0)}
+
+@media(max-width:580px){
+  .gate-grid{grid-template-columns:1fr}
+  .cmd-top{flex-direction:column}
+  .cap-row{flex-direction:column}
+  .cap{min-width:unset}
+  .notice-row{flex-direction:column;gap:5px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ██ HEADER ██ -->
+<div class="hd">
+  <div class="hd-guild">🛡️ 天晴行会</div>
+  <div class="hd-title">⚔️ 诺维京守城战 · 作战简报</div>
+  <div class="hd-meta">
+    <span>📅 2026年7月18日</span>
+    <span>⏰ 20:00 – 21:00</span>
+    <span>🏰 守城方</span>
+    <span>👥 参战 30 人</span>
+    <span>💰 胜利奖励 50,000 魔金 平分</span>
+  </div>
+</div>
+
+<!-- ██ 参战公告 ██ -->
+<div class="notice-banner">
+  <div class="notice-top">
+    <span class="notice-icon">📢</span>
+    <span class="notice-title">参战公告</span>
+    <span class="notice-tag">请仔细阅读</span>
+  </div>
+  <div class="notice-rows">
+    <div class="notice-row">
+      <div class="nr-icon">🎮</div>
+      <div class="nr-body">
+        <div class="nr-t">话9主号 · 全程参战</div>
+        <div class="nr-d">话9主号玩家按正常时间参与，<strong>19:55前进入游戏就位</strong>，各归本组阵地，全程不得提前离场。</div>
+      </div>
+    </div>
+    <div class="notice-row">
+      <div class="nr-icon">🔔</div>
+      <div class="nr-body">
+        <div class="nr-t">非话9小号 · 最后20分钟上场</div>
+        <div class="nr-d">非话9玩家的游戏号请在 <em>20:40</em> 进入游戏，加入对应队伍协助守尾盘。提前上场可能因战力差距适得其反，请遵守时间安排。</div>
+      </div>
+    </div>
+    <div class="notice-row">
+      <div class="nr-icon">🎙️</div>
+      <div class="nr-body">
+        <div class="nr-t">强烈鼓励 · 全程进腾讯会议旁听</div>
+        <div class="nr-d">即使游戏号暂未上场，欢迎 <strong>全程进入腾讯会议</strong> 感受攻城氛围、了解战况动态。旁听请<strong>默认静音</strong>，不抢麦，随时准备接收临时指令。</div>
+      </div>
+    </div>
+  </div>
+  <div class="notice-footer">📌 游戏号进场时间不同，但我们是同一支队伍 · 大家加油！🏆</div>
+</div>
+
+<!-- ██ 指挥架构 ██ -->
+<div class="sec">
+  <div class="sec-hd">👑 指挥架构</div>
+  <div class="sec-bd">
+    <div class="cmd-top">
+      <div class="cmd-card total">
+        <div class="cmd-lbl">总指挥</div>
+        <div class="cmd-name">小潘</div>
+        <div class="cmd-sub">腾讯会议远程指挥 · 全场战术总调度</div>
+      </div>
+      <div class="cmd-card vice">
+        <div class="cmd-lbl">副指挥</div>
+        <div class="cmd-name">青山</div>
+        <div class="cmd-sub">元素/塑能 700 · 中央在场协调执行</div>
+      </div>
+      <div class="cmd-card meet">
+        <div class="cmd-lbl">指挥渠道</div>
+        <div class="cmd-name">腾讯会议</div>
+        <div class="cmd-sub">19:40 准时进会 · 全程在线</div>
+      </div>
+    </div>
+    <div class="cap-row">
+      <div class="cap">
+        <div class="cap-dot" style="background:#f59e0b"></div>
+        <span class="cap-name">盛夏 <span class="st">★</span></span>
+        <span class="cap-zone">中央小队长</span>
+      </div>
+      <div class="cap">
+        <div class="cap-dot" style="background:#8b5cf6"></div>
+        <span class="cap-name">有晴天 <span class="st">★</span></span>
+        <span class="cap-zone">东南小队长</span>
+      </div>
+      <div class="cap">
+        <div class="cap-dot" style="background:#3b82f6"></div>
+        <span class="cap-name">关云长 <span class="st">★</span></span>
+        <span class="cap-zone">东北小队长</span>
+      </div>
+      <div class="cap">
+        <div class="cap-dot" style="background:#ef4444"></div>
+        <span class="cap-name">马超 <span class="st">★</span></span>
+        <span class="cap-zone">西南小队长</span>
+      </div>
+      <div class="cap">
+        <div class="cap-dot" style="background:#22c55e"></div>
+        <span class="cap-name">诸葛子龙 <span class="st">★</span></span>
+        <span class="cap-zone">西北小队长</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ██ 核心战略 ██ -->
+<div class="sec">
+  <div class="sec-hd">🧠 核心战略</div>
+  <div class="sec-bd">
+    <div class="strat-list">
+      <div class="si">
+        <div class="si-num">1</div>
+        <div>
+          <div class="si-t">中央队是全局的轴，不是某一门的附属</div>
+          <div class="si-d">盛夏小队驻守中央神迹待命，不主动扎入固定阵地。哪条防线告急，立即按指挥指令驰援。中央是最贵的战力，不提前消耗在单一方向。</div>
+        </div>
+      </div>
+      <div class="si">
+        <div class="si-num">2</div>
+        <div>
+          <div class="si-t">各守备队守本阵地，无令不擅自支援</div>
+          <div class="si-d">四门守备各司其职，队长有最高临场决策权。未遭遇神迹血量骤降的紧急情况，不得自行脱离阵地——顾此失彼是守城失败的第一原因。</div>
+        </div>
+      </div>
+      <div class="si">
+        <div class="si-num">3</div>
+        <div>
+          <div class="si-t">职业分工：战士卡位 · 法师控场 · 射手游走</div>
+          <div class="si-d">宠儿（野蛮）、韩立（先锋）、昊天金阙（先锋）优先卡门口抗压，为法师（元素/塑能）创造输出空间。暗影/暮光射手游走输出，切忌呆站正面当靶。</div>
+        </div>
+      </div>
+      <div class="si">
+        <div class="si-num">4</div>
+        <div>
+          <div class="si-t">双号玩家充分利用 · 奶妈全程在中央备战</div>
+          <div class="si-d">小攀通灵大师（奶妈700★）固定在中央，危急时刻提供回血支撑，不主动前出。诸葛子龙副号寂灭元法（元素700★）可在西北额外补充输出。</div>
+        </div>
+      </div>
+      <div class="si">
+        <div class="si-num">5</div>
+        <div>
+          <div class="si-t">实时通报神迹状态 · 指挥信息不能断</div>
+          <div class="si-d">各队长每5分钟在腾讯会议报告神迹血量。神迹血量低于50%立即喊话，不要等到快崩才开口。信息差是守城的最大隐患。</div>
+        </div>
+      </div>
+      <div class="si">
+        <div class="si-num">6</div>
+        <div>
+          <div class="si-t">不打情绪战 · 嘲讽不入耳，行动说话</div>
+          <div class="si-d">参考上两周规律：敌方受压后会转向嘲讽与道德绑架。我们的做法是继续用战果回应，不在语言层面消耗精力，不因为情绪改变战术部署。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ██ 作战纪律 ██ -->
+<div class="sec">
+  <div class="sec-hd">⚠️ 作战纪律</div>
+  <div class="sec-bd">
+    <div class="disc-list">
+      <div class="di">
+        <div class="di-mark">1</div>
+        <div class="di-t"><strong>19:40 准时进入腾讯会议</strong>，青山点名确认人员到位，最终核对分组</div>
+      </div>
+      <div class="di">
+        <div class="di-mark">2</div>
+        <div class="di-t">进会后<strong>默认关闭麦克风</strong>，仅总指挥、副指挥、各队长开麦，非紧急情况不抢麦</div>
+      </div>
+      <div class="di">
+        <div class="di-mark">3</div>
+        <div class="di-t"><em>非话9小号 20:40 进入游戏</em>，话9主号正常全程参战，两类玩家进场时间不同，请严格区分</div>
+      </div>
+      <div class="di">
+        <div class="di-mark">4</div>
+        <div class="di-t">未收到<strong>明确驰援指令</strong>，守备队成员不得擅自前往其他阵地，避免本方神迹出现空门</div>
+      </div>
+      <div class="di">
+        <div class="di-mark">5</div>
+        <div class="di-t">各队长<strong>拥有本队最高临场决策权</strong>，成员服从队长调度，战后有异议再讨论</div>
+      </div>
+      <div class="di">
+        <div class="di-mark">6</div>
+        <div class="di-t"><strong>禁止单独深入敌方阵地</strong>送人头；击杀后立即撤回，不恋战，不追至不安全区域</div>
+      </div>
+      <div class="di">
+        <div class="di-mark">7</div>
+        <div class="di-t">敌方大群嘲讽挑衅，<strong>一律不回应</strong>。开口回嘴是在用他们定义的标准量自己</div>
+      </div>
+      <div class="di">
+        <div class="di-mark">8</div>
+        <div class="di-t">奖励分配：<em>守城成功 → 50,000魔金按实际参战人数平分</em>；倾心梦后半场（20:30+）加入视为参与分配</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ██ 作战时间轴 ██ -->
+<div class="sec">
+  <div class="sec-hd">🕐 作战时间轴</div>
+  <div class="sec-bd">
+    <div class="tl">
+      <div class="tli">
+        <div class="tli-dot" style="background:#f59e0b"></div>
+        <div class="tli-time">19:40</div>
+        <div class="tli-t">进入腾讯会议集合</div>
+        <div class="tli-d">青山点名，确认30人到位，最终核对人员分组<br>
+          <span class="tli-notice">📢 非话9小号也欢迎此时进会旁听 · 默认静音</span>
+        </div>
+      </div>
+      <div class="tli">
+        <div class="tli-dot" style="background:#f59e0b"></div>
+        <div class="tli-time">19:55</div>
+        <div class="tli-t">话9主号进入游戏 · 各队就位</div>
+        <div class="tli-d">各守备队提前5分钟抵达本神迹，队长完成内部站位确认</div>
+      </div>
+      <div class="tli">
+        <div class="tli-dot" style="background:#ef4444"></div>
+        <div class="tli-time">20:00</div>
+        <div class="tli-t">🔔 攻城战正式开始</div>
+        <div class="tli-d">各守备队保持阵型，中央队待命，等待敌方第一波动向，<span class="tli-key">不主动冒进</span></div>
+      </div>
+      <div class="tli">
+        <div class="tli-dot" style="background:#ef4444"></div>
+        <div class="tli-time">20:00 – 20:15</div>
+        <div class="tli-t">开局接触阶段</div>
+        <div class="tli-d">敌方试探进攻路线，各守备队稳住第一波冲击。中央收集战场信息，准备机动</div>
+      </div>
+      <div class="tli">
+        <div class="tli-dot" style="background:#ef4444"></div>
+        <div class="tli-time">20:15 – 20:30</div>
+        <div class="tli-t">中期拉锯 · 中央开始机动</div>
+        <div class="tli-d">战线趋于明朗后，青山根据各方报告判断压力点，中央队增援最危险阵地</div>
+      </div>
+      <div class="tli">
+        <div class="tli-dot" style="background:#8b5cf6"></div>
+        <div class="tli-time">20:30</div>
+        <div class="tli-t">倾心梦上线 · 加入西南守备队</div>
+        <div class="tli-d">马超完成队伍整合，西南战力补充到位</div>
+      </div>
+      <div class="tli">
+        <div class="tli-dot" style="background:#f59e0b"></div>
+        <div class="tli-time">20:40</div>
+        <div class="tli-t">⚡ 非话9小号进入游戏</div>
+        <div class="tli-d">
+          各小号按分组加入对应守备队，听从队长指挥协助守尾盘<br>
+          <span class="tli-notice">🔔 此时间之前请仅在腾讯会议旁听，不要提前进游戏上场</span>
+        </div>
+      </div>
+      <div class="tli">
+        <div class="tli-dot" style="background:#8b5cf6"></div>
+        <div class="tli-time">20:30 – 20:45</div>
+        <div class="tli-t">⚡ 中场决战阶段 · 最高风险期</div>
+        <div class="tli-d"><span class="tli-key">敌方通常在此阶段集中兵力主攻某一门</span>。各队长高频报告神迹血量，中央全力备援，奶妈待命</div>
+      </div>
+      <div class="tli">
+        <div class="tli-dot" style="background:#22c55e"></div>
+        <div class="tli-time">20:45 – 21:00</div>
+        <div class="tli-t">终局收尾 · 稳住胜局</div>
+        <div class="tli-d">坚守阵线，不给敌方翻盘机会。<span class="tli-key">最后15分钟也是心理战</span>，保持专注，不松懈</div>
+      </div>
+      <div class="tli">
+        <div class="tli-dot" style="background:#22c55e"></div>
+        <div class="tli-time">21:00</div>
+        <div class="tli-t">✅ 攻城战结束</div>
+        <div class="tli-d">守城成功 → 50,000 魔金结算平分 🎉</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ██ 人员分组 ██ -->
+<div class="sec">
+  <div class="sec-hd">🗺️ 人员分组</div>
+  <div class="grp-sec">
+
+    <!-- 中央 -->
+    <div class="t-card central" style="margin-bottom:10px">
+      <div class="t-hd">
+        <div class="t-dot"></div>
+        <span class="t-name">中央指挥队</span>
+        <span class="t-sub">（盛夏小队）</span>
+        <span class="t-stat">7人 · ★×5 · 机动策应</span>
+      </div>
+      <div class="lead-blk">
+        <div class="lead-item">
+          <span class="lead-lbl">总指挥</span>
+          <span class="lead-name">小潘</span>
+          <span class="lead-inf">腾讯会议</span>
+        </div>
+        <div class="lead-item">
+          <span class="lead-lbl">副指挥</span>
+          <span class="lead-name">青山</span>
+          <span class="lead-inf">元素/塑能700</span>
+        </div>
+        <div class="lead-item">
+          <span class="lead-lbl">小队长</span>
+          <span class="lead-name">盛夏 <span class="st">★</span></span>
+          <span class="lead-inf">塑能700</span>
+        </div>
+      </div>
+      <div class="mems">
+        <div class="mr">
+          <div class="m-n">①</div><div class="m-dot"></div>
+          <div class="m-name">小攀</div>
+          <div class="m-tags">
+            <span class="b dual">双号</span>
+            <span class="b yuan">元素</span><span class="lv">700</span><span class="st">★</span>
+            <span style="font-size:10px;color:#0891b2;white-space:nowrap">+通灵700★</span>
+          </div>
+        </div>
+        <div class="mr">
+          <div class="m-n">②</div><div class="m-dot"></div>
+          <div class="m-name">冷漠心灵</div>
+          <div class="m-tags"><span class="b mu">暮光行者</span><span class="lv">700</span><span class="st">★</span></div>
+        </div>
+        <div class="mr">
+          <div class="m-n">③</div><div class="m-dot"></div>
+          <div class="m-name">昊天金阙弥罗玉皇上帝</div>
+          <div class="m-tags"><span class="b xian">先锋</span><span class="lv">700</span><span class="st">★</span></div>
+        </div>
+        <div class="mr">
+          <div class="m-n">④</div><div class="m-dot"></div>
+          <div class="m-name">白云浪天涯</div>
+          <div class="m-tags"><span class="b yuan">元素</span><span class="lv">700</span><span class="st">★</span></div>
+        </div>
+        <div class="mr">
+          <div class="m-n">⑤</div><div class="m-dot"></div>
+          <div class="m-name">宠儿</div>
+          <div class="m-tags"><span class="b ye">野蛮</span><span class="lv">700</span></div>
+        </div>
+      </div>
+      <div class="t-foot">📍 中央神迹常驻待命 · 随指令立即机动增援任意阵地 · 奶妈全程备战勿前出</div>
+    </div>
+
+    <!-- 2×2 Gate Grid -->
+    <div class="gate-grid">
+
+      <!-- 东南 -->
+      <div class="t-card se-t">
+        <div class="t-hd">
+          <div class="t-dot"></div>
+          <span class="t-name">东南守备队</span>
+          <span class="t-stat">6人 · ★×2</span>
+        </div>
+        <div class="lead-blk">
+          <div class="lead-item" style="min-width:unset">
+            <span class="lead-lbl">小队长</span>
+            <span class="lead-name">有晴天 <span class="st">★</span></span>
+            <span class="lead-inf">元素700</span>
+          </div>
+        </div>
+        <div class="mems">
+          <div class="mr">
+            <div class="m-n">①</div><div class="m-dot"></div>
+            <div class="m-name">汉升</div>
+            <div class="m-tags"><span class="b an">暗影</span><span class="lv">700</span><span class="st">★</span></div>
+          </div>
+          <div class="mr">
+            <div class="m-n">②</div><div class="m-dot"></div>
+            <div class="m-name">雨中的法师</div>
+            <div class="m-tags"><span class="b yuan">元素</span><span class="lv">700</span></div>
+          </div>
+          <div class="mr">
+            <div class="m-n">③</div><div class="m-dot"></div>
+            <div class="m-name">一杯酸牛奶</div>
+            <div class="m-tags"><span class="b su">塑能</span><span class="lv">700</span></div>
+          </div>
+          <div class="mr">
+            <div class="m-n">④</div><div class="m-dot"></div>
+            <div class="m-name">清漪</div>
+            <div class="m-tags"><span class="b an">暗影</span><span class="lv">700</span></div>
+          </div>
+          <div class="mr">
+            <div class="m-n">⑤</div><div class="m-dot"></div>
+            <div class="m-name">大肥猪</div>
+            <div class="m-tags"><span class="b she">射手</span><span class="lv">700</span></div>
+          </div>
+        </div>
+        <div class="t-foot">📍 东南神迹 · 留意西南信号</div>
+      </div>
+
+      <!-- 东北 -->
+      <div class="t-card ne-t">
+        <div class="t-hd">
+          <div class="t-dot"></div>
+          <span class="t-name">东北守备队</span>
+          <span class="t-stat">6人 · ★×2</span>
+        </div>
+        <div class="lead-blk">
+          <div class="lead-item" style="min-width:unset">
+            <span class="lead-lbl">小队长</span>
+            <span class="lead-name">关云长 <span class="st">★</span></span>
+            <span class="lead-inf">暗影700</span>
+          </div>
+        </div>
+        <div class="mems">
+          <div class="mr">
+            <div class="m-n">①</div><div class="m-dot"></div>
+            <div class="m-name">燕九郎</div>
+            <div class="m-tags"><span class="b an">暗影</span><span class="lv">700</span><span class="st">★</span></div>
+          </div>
+          <div class="mr">
+            <div class="m-n">②</div><div class="m-dot"></div>
+            <div class="m-name">蓝草平生无归处</div>
+            <div class="m-tags"><span class="b su">塑能</span><span class="lv">700</span></div>
+          </div>
+          <div class="mr">
+            <div class="m-n">③</div><div class="m-dot"></div>
+            <div class="m-name">七个小矮人</div>
+            <div class="m-tags"><span class="b an">暗影</span><span class="lv">700</span></div>
+          </div>
+          <div class="mr">
+            <div class="m-n">④</div><div class="m-dot"></div>
+            <div class="m-name">血影</div>
+            <div class="m-tags"><span class="b yuan">元素</span><span class="lv">700</span></div>
+          </div>
+          <div class="mr">
+            <div class="m-n">⑤</div><div class="m-dot"></div>
+            <div class="m-name">Agent17</div>
+            <div class="m-tags"><span class="b an">暗影</span><span class="lv">700</span></div>
+          </div>
+        </div>
+        <div class="t-foot">📍 东北神迹 · 留意西北信号</div>
+      </div>
+
+      <!-- 西南 -->
+      <div class="t-card sw-t">
+        <div class="t-hd">
+          <div class="t-dot"></div>
+          <span class="t-name">西南守备队</span>
+          <span class="t-stat">5+1人 · ★×1</span>
+        </div>
+        <div class="lead-blk">
+          <div class="lead-item" style="min-width:unset">
+            <span class="lead-lbl">小队长</span>
+            <span class="lead-name">马超 <span class="st">★</span></span>
+            <span class="lead-inf">暮光700</span>
+          </div>
+        </div>
+        <div class="mems">
+          <div class="mr">
+            <div class="m-n">①</div><div class="m-dot"></div>
+            <div class="m-name">万妖之歌</div>
+            <div class="m-tags"><span class="b su">塑能</span><span class="lv">700</span></div>
+          </div>
+          <div class="mr">
+            <div class="m-n">②</div><div class="m-dot"></div>
+            <div class="m-name">剑魂</div>
+            <div class="m-tags"><span class="b su">塑能</span><span class="lv">700</span></div>
+          </div>
+          <div class="mr">
+            <div class="m-n">③</div><div class="m-dot"></div>
+            <div class="m-name">大茄子</div>
+            <div class="m-tags"><span class="b yuan">元素</span><span class="lv">600</span></div>
+          </div>
+          <div class="mr">
+            <div class="m-n">④</div><div class="m-dot"></div>
+            <div class="m-name">清風揽月</div>
+            <div class="m-tags"><span class="b an">暗影</span><span class="lv">700</span></div>
+          </div>
+          <div class="mr">
+            <div class="m-n">⑤</div><div class="m-dot"></div>
+            <div class="m-name">倾心梦</div>
+            <div class="m-tags"><span class="b hun">混子</span><span style="font-size:10px;color:#f59e0b;white-space:nowrap">20:30+</span></div>
+          </div>
+        </div>
+        <div class="t-foot">📍 西南神迹 · 留意东南信号</div>
+      </div>
+
+      <!-- 西北 -->
+      <div class="t-card nw-t">
+        <div class="t-hd">
+          <div class="t-dot"></div>
+          <span class="t-name">西北守备队</span>
+          <span class="t-stat">5人 · ★×2</span>
+        </div>
+        <div class="lead-blk">
+          <div class="lead-item" style="min-width:unset">
+            <span class="lead-lbl">小队长</span>
+            <span class="lead-name">诸葛子龙 <span class="st">★</span></span>
+            <span class="lead-inf">暗影700·双号</span>
+          </div>
+        </div>
+        <div class="mems">
+          <div class="mr">
+            <div class="m-n">①</div><div class="m-dot"></div>
+            <div class="m-name">尘辞</div>
+            <div class="m-tags"><span class="b an">暗影</span><span class="lv">700</span><span class="st">★</span></div>
+          </div>
+          <div class="mr">
+            <div class="m-n">②</div><div class="m-dot"></div>
+            <div class="m-name">破碎的梦</div>
+            <div class="m-tags"><span class="b an">暗影</span><span class="lv">700</span></div>
+          </div>
+          <div class="mr">
+            <div class="m-n">③</div><div class="m-dot"></div>
+            <div class="m-name">韩立</div>
+            <div class="m-tags"><span class="b xian">先锋</span><span class="lv">700</span></div>
+          </div>
+          <div class="mr">
+            <div class="m-n">④</div><div class="m-dot"></div>
+            <div class="m-name">一叶知秋</div>
+            <div class="m-tags"><span class="b an">暗影</span><span class="lv">700</span></div>
+          </div>
+        </div>
+        <div class="t-foot">📍 西北神迹 · 留意东北信号 · 副号寂灭元法备用</div>
+      </div>
+
+    </div><!-- end gate-grid -->
+
+    <div style="margin-top:10px;padding:9px 13px;background:#f8fafc;border-radius:9px;font-size:11.5px;color:#64748b;border:1px dashed #dde1eb">
+      📌 <strong>分组备注：</strong>后接龙的华南虎和悯人归队中央；倾心梦后半场加入西南；诸葛子龙副号寂灭元法（元素700★）可在西北额外补充输出。总参战 <strong>30人</strong>。
+    </div>
+
+  </div>
+</div>
+
+<div class="doc-foot">天晴行会 · 诺维京守城战 · 2026年7月18日 · 愿神迹长立，胜利归晴天 🏰<br><a href="./result.html" class="go-btn">查看战果 🏆</a></div>
+
+</div>
+</body>
+</html>

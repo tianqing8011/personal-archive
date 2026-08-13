@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>天晴行会 · 守城胜利公告</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,'Microsoft YaHei','微软雅黑',PingFang SC,sans-serif;
+  background:#f4ede0;min-height:100vh;padding:14px;color:#2c1a00;
+}
+.wrap{max-width:780px;margin:0 auto}
+
+/* HEADER */
+.hd{
+  background:linear-gradient(135deg,#7c2200 0%,#c44800 40%,#e87818 65%,#c46000 85%,#7c2200 100%);
+  border-radius:14px 14px 0 0;
+  padding:28px 20px 24px;text-align:center;position:relative;overflow:hidden;
+}
+.hd::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% -5%, rgba(255,230,60,.22) 0%, transparent 58%);
+}
+.hd::after{
+  content:'⚔️';position:absolute;right:22px;bottom:14px;
+  font-size:58px;opacity:.09;line-height:1;
+}
+.hd-guild{
+  display:inline-block;background:rgba(0,0,0,.25);
+  color:rgba(255,230,150,.8);font-size:11px;
+  padding:3px 16px;border-radius:20px;letter-spacing:3px;
+  margin-bottom:12px;position:relative;border:1px solid rgba(255,200,80,.18);
+}
+.hd-trophy{font-size:46px;line-height:1;display:block;margin-bottom:10px;position:relative}
+.hd-title{
+  font-size:26px;font-weight:900;color:#fff8d8;
+  letter-spacing:3px;text-shadow:0 2px 10px rgba(0,0,0,.3);
+  position:relative;margin-bottom:6px;
+}
+.hd-date{font-size:12px;color:rgba(255,218,140,.6);position:relative}
+
+/* BODY */
+.body{
+  background:#fff;
+  border:1px solid #e8d5b0;border-top:none;
+  border-radius:0 0 14px 14px;
+  padding:20px 18px;
+}
+
+/* THANK YOU */
+.ty{
+  background:linear-gradient(135deg,#fffcf0,#fff8e6);
+  border:1px solid #f0d898;border-left:4px solid #d4880a;
+  border-radius:10px;padding:18px 18px 14px;margin-bottom:16px;
+  font-size:13.5px;line-height:2;color:#3a1e00;
+}
+.ty .opener{font-size:15.5px;font-weight:900;color:#8b1e00;margin-bottom:10px;line-height:1.6}
+.ty p{margin-bottom:10px}
+.ty p:last-of-type{margin-bottom:0}
+.ty strong{color:#b05800}
+.ty .sig{
+  margin-top:14px;padding-top:10px;
+  border-top:1px dashed #e8d090;
+  text-align:right;font-size:12px;color:#9a7030;
+}
+
+/* STATS */
+.stats{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.stat{
+  flex:1;min-width:100px;background:#fff;
+  border:1px solid #e8d5b0;border-top:3px solid #d4880a;
+  border-radius:10px;padding:12px 10px;text-align:center;
+  box-shadow:0 2px 6px rgba(0,0,0,.04);
+}
+.stat-l{font-size:10px;color:#c8a050;letter-spacing:1px;margin-bottom:4px}
+.stat-n{font-size:21px;font-weight:900;color:#b05800;line-height:1.1}
+.stat-u{font-size:11px;color:#9a7030;margin-top:2px}
+
+/* DIST */
+.dist{
+  background:linear-gradient(90deg,#fff4e0,#fff9f0);
+  border:1px solid #f0c878;border-radius:10px;
+  padding:13px 16px;margin-bottom:18px;
+  display:flex;align-items:center;gap:12px;
+}
+.dist-av{
+  width:46px;height:46px;
+  background:linear-gradient(135deg,#d4880a,#f0b830);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:22px;flex-shrink:0;
+  box-shadow:0 2px 8px rgba(180,120,0,.2);
+}
+.dist-t{font-size:14px;font-weight:800;color:#5a3000;margin-bottom:4px}
+.dist-d{font-size:12px;color:#9a6030;line-height:1.6}
+.dist-d strong{color:#b05800}
+
+/* TABLE */
+.tbl-hd{
+  font-size:12px;font-weight:700;letter-spacing:2px;
+  color:#9a7030;margin-bottom:10px;
+  display:flex;align-items:center;gap:6px;
+}
+.tbl-wrap{
+  border-radius:10px;border:1px solid #e8d5b0;
+  overflow:hidden;overflow-x:auto;
+}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+thead tr{background:#fdf3da}
+thead th{
+  padding:9px 10px;color:#9a7030;
+  font-weight:700;font-size:11px;letter-spacing:1px;
+  white-space:nowrap;border-bottom:2px solid #e8d090;text-align:left;
+}
+thead th.ctr{text-align:center}
+tbody tr{border-top:1px solid #f5ead0}
+tbody tr:hover{background:#fffbf0}
+td{padding:8px 10px;color:#3d2200;vertical-align:middle}
+td.ctr{text-align:center}
+
+.rank{
+  width:22px;height:22px;border-radius:50%;
+  display:inline-flex;align-items:center;justify-content:center;
+  font-size:10px;font-weight:800;
+}
+.r1{background:#ffd700;color:#4a2200;box-shadow:0 0 6px rgba(255,200,0,.45)}
+.r2{background:#b8b8b8;color:#222}
+.r3{background:#c87830;color:#fff}
+.rn{background:#f5ead0;color:#9a7030}
+
+.n-main{font-size:13px;font-weight:700;color:#2c1500}
+.n-sub{font-size:11px;color:#c09050;margin-top:1px}
+.oli-tag{
+  display:inline-block;background:#fff3dc;
+  border:1px solid #f0c060;color:#d4800a;
+  font-size:9px;padding:1px 6px;border-radius:10px;
+  margin-left:5px;font-weight:700;vertical-align:middle;
+}
+.jt{font-size:12px;font-variant-numeric:tabular-nums;color:#7a5020;white-space:nowrap}
+.jt-e{color:#c05000;font-weight:700}
+.dur-t{font-size:12px;font-variant-numeric:tabular-nums;color:#5a3200;font-weight:600;white-space:nowrap}
+.dur-bar{height:3px;background:#f5ead0;border-radius:2px;margin-top:4px;overflow:hidden;min-width:50px}
+.dur-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,#c87800,#ffd060)}
+.reward{font-size:13px;font-weight:800;color:#c87800;white-space:nowrap}
+.badge{
+  display:inline-block;
+  background:#fff3e0;border:1px solid #f0c870;
+  color:#d4800a;font-size:10px;
+  padding:2px 9px;border-radius:20px;white-space:nowrap;
+}
+
+/* FOOTER */
+.ft{
+  margin-top:18px;padding-top:14px;
+  border-top:1px dashed #e8d5b0;
+  text-align:center;font-size:12px;color:#c09050;line-height:2;
+}
+
+.back-btn{
+  display:inline-block;margin-bottom:12px;
+  background:linear-gradient(135deg,#c44800,#e87818);
+  color:#fff;text-decoration:none;font-weight:700;
+  padding:9px 20px;border-radius:22px;letter-spacing:1px;font-size:13px;
+  box-shadow:0 3px 10px rgba(196,72,0,.25);
+  transition:transform .15s ease,box-shadow .15s ease;
+}
+.back-btn:hover{transform:translateY(-2px);box-shadow:0 5px 14px rgba(196,72,0,.32)}
+.back-btn:active{transform:translateY(0)}
+
+@media(max-width:540px){
+  .stats{gap:8px}
+  .stat{min-width:72px}
+  .stat-n{font-size:18px}
+  thead th,td{padding:7px 7px;font-size:11.5px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<a href="./index.html" class="back-btn">← 返回作战简报</a>
+
+<!-- HEADER -->
+<div class="hd">
+  <div class="hd-guild">🛡️ 天晴行会</div>
+  <span class="hd-trophy">🏆</span>
+  <div class="hd-title">诺维京守城大捷</div>
+  <div class="hd-date">2026年7月18日 · 守城战 · 胜利公告</div>
+</div>
+
+<div class="body">
+
+  <!-- THANK YOU -->
+  <div class="ty">
+    <div class="opener">各位亲爱的天晴人，<strong>我们守住了！🏰✨</strong></div>
+    <p>
+      今晚的诺维京守城战，终于以胜利画下了完美的句号。想对每一位参与今晚战斗的伙伴说一声——
+      <strong>真的辛苦了，也真的谢谢你们。</strong>
+    </p>
+    <p>
+      有人早早进会，安静地守在那里等待开战；有人全程坚守阵地、片刻不退；有人在最关键的时刻赶来，及时填补了缺口。
+      <strong>无论你在线多久、哪个时间点加入，你的每一份付出，我们都看在眼里、记在心里。</strong>
+      正是因为有你们，神迹才能屹立到最后。
+    </p>
+    <p>
+      这份胜利，是大家一点一点拼出来的，是每一位天晴人共同的荣耀。<strong>感谢你们❤️</strong>
+    </p>
+    <p>
+      本次守城战共 <strong>31 位勇士</strong> 参战，行会将如约发放魔金奖励，<strong>每人 1,612 魔金</strong>。
+      本次奖励发放工作由 <strong>奥利</strong> 负责，请各位<strong>主动联系奥利领取</strong>，莫错过属于你的战利品！🪙
+    </p>
+    <div class="sig">—— 天晴行会 · 2026年7月18日 ——</div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-l">参战人数</div>
+      <div class="stat-n">31</div>
+      <div class="stat-u">位勇士</div>
+    </div>
+    <div class="stat">
+      <div class="stat-l">人均奖励</div>
+      <div class="stat-n">1,612</div>
+      <div class="stat-u">魔金</div>
+    </div>
+    <div class="stat">
+      <div class="stat-l">奖励总计</div>
+      <div class="stat-n">49,972</div>
+      <div class="stat-u">魔金</div>
+    </div>
+    <div class="stat">
+      <div class="stat-l">守城时长</div>
+      <div class="stat-n">60</div>
+      <div class="stat-u">分钟</div>
+    </div>
+  </div>
+
+  <!-- DISTRIBUTOR -->
+  <div class="dist">
+    <div class="dist-av">🪙</div>
+    <div>
+      <div class="dist-t">本次奖励由 奥利 负责发放</div>
+      <div class="dist-d">
+        请各位直接私信 <strong>奥利</strong> 领取 1,612 魔金，奥利将对照下方名单逐一核对并发放。<br>
+        请大家主动联系，领完后状态将更新为「已领取」。
+      </div>
+    </div>
+  </div>
+
+  <!-- TABLE -->
+  <div class="tbl-hd">📋 参战名单 · 奖励明细（按入会时间排序）</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th class="ctr">序</th>
+          <th>入会昵称</th>
+          <th>用户昵称</th>
+          <th>首次入会</th>
+          <th>参会时长</th>
+          <th class="ctr">奖励魔金</th>
+          <th class="ctr">状态</th>
+        </tr>
+      </thead>
+      <tbody id="tb"></tbody>
+    </table>
+  </div>
+
+  <div class="ft">
+    战旗所指，无坚不摧 · 天晴行会 · 2026.07.18 🏆<br>
+    <span style="font-size:11px;color:#d4aa60">感谢每一位今晚在场的勇士，下次战斗再见！</span>
+  </div>
+</div>
+</div>
+
+<script>
+const players = [
+  {meet:'大茄子',      user:'武',               join:'19:36:07', dur:'1:15:41', mins:75+41/60},
+  {meet:'宠儿',        user:'梦',               join:'19:38:08', dur:'1:22:30', mins:82+30/60},
+  {meet:'玉皇大帝',    user:'玉皇大帝',         join:'19:39:59', dur:'1:20:16', mins:80+16/60},
+  {meet:'武圣关云长',  user:'武圣关云长',       join:'19:40:03', dur:'1:20:36', mins:80+36/60},
+  {meet:'雨中的法师',  user:'陌笙*',            join:'19:42:50', dur:'1:10:52', mins:70+52/60},
+  {meet:'缘定三生',    user:'缘定三生',         join:'19:45:34', dur:'1:15:05', mins:75+5/60},
+  {meet:'谨言',        user:'谨言',             join:'19:45:53', dur:'1:02:53', mins:62+53/60},
+  {meet:'华南虎',      user:'、洋葱',           join:'19:47:05', dur:'1:13:34', mins:73+34/60},
+  {meet:'馨雨',        user:'ℳℒℴѵℯ·鑫',       join:'19:48:09', dur:'1:12:30', mins:72+30/60},
+  {meet:'天晴',        user:'天晴',             join:'19:48:59', dur:'1:14:36', mins:74+36/60},
+  {meet:'冷漠心灵',    user:'冷漠心灵',         join:'19:49:48', dur:'1:10:51', mins:70+51/60},
+  {meet:'燕九郎',      user:'忆往昔',           join:'19:51:17', dur:'1:09:22', mins:69+22/60},
+  {meet:'奥利',        user:'奥利',             join:'19:54:42', dur:'1:05:56', mins:65+56/60, oli:true},
+  {meet:'^_^',         user:'^_^',              join:'19:55:05', dur:'0:06:05', mins:6+5/60},
+  {meet:'万妖之歌',    user:'万妖之歌',         join:'19:55:41', dur:'1:04:57', mins:64+57/60},
+  {meet:'月下横刀/破碎的梦', user:'月下横刀',  join:'19:56:38', dur:'1:04:01', mins:64+1/60},
+  {meet:'汉升',        user:'',                 join:'19:56:38', dur:'1:03:43', mins:63+43/60},
+  {meet:'西凉锦马超',  user:'余生尽欢',         join:'19:57:09', dur:'1:03:30', mins:63+30/60},
+  {meet:'Agent17',     user:'初见',             join:'19:57:56', dur:'1:02:43', mins:62+43/60},
+  {meet:'一杯酸牛奶',  user:'',                 join:'19:58:20', dur:'1:02:21', mins:62+21/60},
+  {meet:'Zero',        user:'Zero',             join:'19:58:22', dur:'1:02:16', mins:62+16/60},
+  {meet:'尘辞',        user:'紫菀若澜',         join:'19:58:32', dur:'1:02:07', mins:62+7/60},
+  {meet:'叶无道',      user:'叶无道',           join:'19:58:32', dur:'1:02:06', mins:62+6/60},
+  {meet:'韩立',        user:'寒露',             join:'20:02:17', dur:'0:58:21', mins:58+21/60},
+  {meet:'诸葛子龙',    user:'子龙',             join:'20:03:03', dur:'0:57:36', mins:57+36/60},
+  {meet:'朝花夕拾',    user:'一叶知秋',         join:'20:08:33', dur:'0:37:20', mins:37+20/60},
+  {meet:'剑魂',        user:'佳',               join:'20:10:06', dur:'0:50:11', mins:50+11/60},
+  {meet:'血影',        user:'星辰溪谷',         join:'20:12:04', dur:'0:51:59', mins:51+59/60},
+  {meet:'志明哥19940960107', user:'志明哥19940960107', join:'20:13:14', dur:'0:47:25', mins:47+25/60},
+  {meet:'倾心梦',      user:'什么狗巴',         join:'20:35:12', dur:'0:25:27', mins:25+27/60},
+  {meet:'爆爆爆~镇杀一切敌', user:'爆爆爆~镇杀一切敌', join:'20:44:18', dur:'0:16:21', mins:16+21/60},
+];
+
+const maxM = Math.max(...players.map(p=>p.mins));
+const tb   = document.getElementById('tb');
+
+players.forEach((p, i) => {
+  const rank = i + 1;
+  const early = parseInt(p.join) < 20;
+  const pct   = Math.round(p.mins / maxM * 100);
+
+  const rk = rank===1 ? `<span class="rank r1">1</span>`
+           : rank===2 ? `<span class="rank r2">2</span>`
+           : rank===3 ? `<span class="rank r3">3</span>`
+           :            `<span class="rank rn">${rank}</span>`;
+
+  const showUser  = p.user && p.user !== p.meet;
+  const oliTag    = p.oli ? '<span class="oli-tag">发放人</span>' : '';
+  const userCell  = showUser
+    ? `<div style="font-size:12px;color:#7a5020">${p.user}</div>`
+    : `<div style="font-size:11px;color:#d4c0a0">—</div>`;
+
+  tb.innerHTML += `
+  <tr>
+    <td class="ctr">${rk}</td>
+    <td><div class="n-main">${p.meet}${oliTag}</div></td>
+    <td>${userCell}</td>
+    <td><div class="jt${early?' jt-e':''}">${p.join}</div></td>
+    <td>
+      <div class="dur-t">${p.dur}</div>
+      <div class="dur-bar"><div class="dur-fill" style="width:${pct}%"></div></div>
+    </td>
+    <td class="ctr"><span class="reward">🪙 1,612</span></td>
+    <td class="ctr"><span class="badge">待领取</span></td>
+  </tr>`;
+});
+</script>
+</body>
+</html>
