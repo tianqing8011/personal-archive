@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ category_name }} - 我的个人档案</title>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+    <main class="container">
+        <nav class="page-nav">
+            <a href="index.html">← 返回首页</a>
+        </nav>
+
+        <header>
+            <h1>{{ category_name }}</h1>
+            <p class="subtitle">{{ category_description }}</p>
+        </header>
+
+        <section>
+            <div class="entry-list">
+                {{ entries }}
+            </div>
+        </section>
+    </main>
+</body>
+</html>

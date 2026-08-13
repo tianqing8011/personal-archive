@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+    <main class="container">
+        <nav class="page-nav">
+            <a href="../index.html">← 返回首页</a>
+        </nav>
+
+        <header>
+            <h1>{{ title }}</h1>
+            <p class="date">日期：{{ date }}</p>
+
+            <div class="metadata">
+                <div>
+                    <strong>分类：</strong>
+                    {{ categories }}
+                </div>
+
+                <div>
+                    <strong>标签：</strong>
+                    {{ tags }}
+                </div>
+            </div>
+        </header>
+
+        <article>
+            {{ content }}
+        </article>
+    </main>
+</body>
+</html>

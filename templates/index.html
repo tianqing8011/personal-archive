@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的个人档案</title>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+    <main class="container">
+        <header>
+            <h1>我的个人档案</h1>
+            <p class="subtitle">记录工作、学习、生活和游戏</p>
+        </header>
+
+        <section>
+            <nav class="category-nav">
+                <a href="work.html">工作</a>
+                <a href="study.html">学习</a>
+                <a href="life.html">生活</a>
+                <a href="games.html">游戏</a>
+            </nav>
+            <div class="archive-links">
+                <a href="timeline.html">完整时间线</a>
+                <a href="archive.html">月度归档</a>
+                <a href="tags.html">标签</a>
+            </div>
+            <h2>最近记录</h2>
+            <div class="entry-list">
+                {{ entries }}
+            </div>
+        </section>
+    </main>
+</body>
+</html>
