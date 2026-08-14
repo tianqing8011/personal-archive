@@ -1,5 +1,7 @@
 from pathlib import Path
 from html import escape
+import os
+import re
 import shutil
 import markdown
 import yaml
@@ -19,6 +21,129 @@ RICH_PAGES_DIR = Path("rich-pages")
 SPECIAL_OUTPUT_DIR = SITE_DIR / "special"
 ENTRY_OUTPUT_DIR = SITE_DIR / "entries"
 STATIC_OUTPUT_DIR = SITE_DIR / "static"
+
+def make_relative_url(from_directory, target):
+    """计算两个本地路径之间的网页相对路径。"""
+    relative_path = os.path.relpath(
+        target,
+        start=from_directory
+    )
+
+    return relative_path.replace("\\", "/")
+
+
+def inject_rich_navigation(output_folder, topic_title):
+    """给一个丰富专题中的所有 HTML 页面加入统一导航。"""
+
+    topic_home_file = output_folder / "index.html"
+    archive_home_file = SITE_DIR / "index.html"
+    navigation_css_file = STATIC_OUTPUT_DIR / "rich-nav.css"
+
+    for html_file in output_folder.rglob("*.html"):
+        text = html_file.read_text(encoding="utf-8")
+
+        # 防止同一个页面被重复注入导航
+        if 'data-personal-archive-nav="true"' in text:
+            continue
+
+        home_href = make_relative_url(
+            html_file.parent,
+            archive_home_file
+        )
+
+        topic_home_href = make_relative_url(
+            html_file.parent,
+            topic_home_file
+        )
+
+        css_href = make_relative_url(
+            html_file.parent,
+            navigation_css_file
+        )
+
+        # 给专题页面连接公共导航样式
+        stylesheet_tag = (
+            f'<link rel="stylesheet" '
+            f'href="{css_href}" '
+            f'data-personal-archive-style="true">'
+        )
+
+        if 'data-personal-archive-style="true"' not in text:
+            head_end_match = re.search(
+                r"</head\s*>",
+                text,
+                flags=re.IGNORECASE
+            )
+
+            if head_end_match:
+                insert_position = head_end_match.start()
+
+                text = (
+                    text[:insert_position]
+                    + f"    {stylesheet_tag}\n"
+                    + text[insert_position:]
+                )
+            else:
+                print(f"警告：专题页面没有 </head>：{html_file}")
+
+        is_topic_home = (
+            html_file.resolve() == topic_home_file.resolve()
+        )
+
+        if is_topic_home:
+            topic_action = """
+<span class="pa-topic-nav__current">
+    专题首页
+</span>
+"""
+        else:
+            topic_action = f"""
+<a class="pa-topic-nav__link"
+   href="{topic_home_href}">
+    返回专题首页
+</a>
+"""
+
+        navigation_html = f"""
+<nav class="pa-topic-nav"
+     data-personal-archive-nav="true"
+     aria-label="专题导航">
+
+    <a class="pa-topic-nav__link"
+       href="{home_href}">
+        ← 返回个人档案
+    </a>
+
+    <span class="pa-topic-nav__title">
+        {escape(topic_title)}
+    </span>
+
+    {topic_action}
+</nav>
+"""
+
+        # 将统一导航放在 body 开始标签之后
+        body_match = re.search(
+            r"<body\b[^>]*>",
+            text,
+            flags=re.IGNORECASE
+        )
+
+        if body_match:
+            insert_position = body_match.end()
+
+            text = (
+                text[:insert_position]
+                + "\n"
+                + navigation_html
+                + text[insert_position:]
+            )
+
+            html_file.write_text(text, encoding="utf-8")
+
+            print(f"已加入专题导航：{html_file}")
+        else:
+            print(f"警告：专题页面没有 <body>：{html_file}")
 
 
 def read_markdown(file_path):
@@ -209,29 +334,11 @@ def build():
                         dirs_exist_ok=True
                     )
 
-                    # 给专题页注入「返回首页」导航
-                    home_link = (
-                        '<div style="text-align:center;'
-                        'margin:14px 0 4px">'
-                        '<a href="../../index.html" '
-                        'style="display:inline-block;'
-                        'background:linear-gradient(135deg,#0f172a,#334155);'
-                        'color:#fff;text-decoration:none;font-weight:700;'
-                        'padding:8px 22px;border-radius:22px;'
-                        'letter-spacing:1px;font-size:13px;'
-                        'box-shadow:0 3px 10px rgba(15,23,42,.18)">'
-                        '← 返回个人档案</a></div>'
+                 # 给专题中的所有 HTML 页面加入统一导航
+                    inject_rich_navigation(
+                        output_folder,
+                        title
                     )
-                    for html_file in output_folder.rglob("*.html"):
-                        text = html_file.read_text(encoding="utf-8")
-                        if 'href="../../index.html"' in text:
-                            continue
-                        if "</body>" in text:
-                            text = text.replace(
-                                "</body>",
-                                f"{home_link}\n</body>"
-                            )
-                            html_file.write_text(text, encoding="utf-8")
 
                     print(f"已复制并关联专题页：{entry_url}")
                 else:
