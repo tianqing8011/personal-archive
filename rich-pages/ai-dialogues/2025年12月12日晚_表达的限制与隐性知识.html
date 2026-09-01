@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>表达的限制与隐性知识</title><meta name="description" content="AI 能处理好订单却说不清&quot;为什么能处理好&quot;——用户由此提出：未来人机交互的核心是表达；隐性知识也许可以转换成显性知识。代码还原不出 AI 能力，LLM vs 传统程序的结构差异被揭开。"><style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei","Hiragino Sans GB",sans-serif;background:#f7f7f8;color:#1f2328;line-height:1.7;-webkit-font-smoothing:antialiased}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px}
+header.site{background:#fff;border-bottom:1px solid #e5e7eb;padding:28px 0 22px}
+h1{font-size:26px;font-weight:700;letter-spacing:.5px}
+.sub{color:#6b7280;font-size:14px;margin-top:6px}
+.stats{display:flex;gap:24px;margin-top:16px;flex-wrap:wrap}
+.stat b{font-size:20px;color:#111827;display:block}
+.stat span{font-size:12px;color:#6b7280}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 4px}
+.chip{cursor:pointer;border:1px solid #d1d5db;background:#fff;color:#374151;padding:4px 12px;border-radius:999px;font-size:13px;transition:all .15s}
+.chip.active{background:#111827;color:#fff;border-color:#111827}
+.chip:hover{border-color:#9ca3af}
+.timeline{position:relative;padding:16px 0 40px}
+.timeline::before{content:"";position:absolute;left:88px;top:8px;bottom:8px;width:2px;background:#e5e7eb}
+.era{margin-top:34px;position:relative}
+.era-tag{position:sticky;top:0;z-index:5;background:linear-gradient(90deg,#111827,#374151);color:#fff;display:inline-block;padding:5px 16px;border-radius:999px;font-size:13px;font-weight:600;letter-spacing:1px;box-shadow:0 2px 8px rgba(0,0,0,.12);margin-bottom:18px}
+.item{position:relative;padding:14px 0 14px 118px}
+.item .dot{position:absolute;left:81px;top:24px;width:16px;height:16px;border-radius:50%;background:#fff;border:3px solid #111827}
+.item .date{position:absolute;left:0;top:20px;width:76px;text-align:right;font-size:12.5px;color:#6b7280;font-variant-numeric:tabular-nums;line-height:1.4}
+.card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:16px 18px;transition:box-shadow .15s,border-color .15s}
+.card:hover{box-shadow:0 4px 16px rgba(0,0,0,.07);border-color:#d1d5db}
+.card h3{font-size:16.5px;font-weight:600;color:#111827}
+.card a.title{color:inherit;text-decoration:none}
+.card a.title:hover{color:#2563eb}
+.card .meta{display:flex;align-items:center;gap:8px;margin:6px 0 8px;flex-wrap:wrap}
+.card .summary{font-size:14px;color:#4b5563}
+footer.site{padding:26px 0 40px;color:#9ca3af;font-size:12.5px;text-align:center;border-top:1px solid #e5e7eb;margin-top:10px}
+@media(max-width:640px){.timeline::before{left:12px}.item{padding-left:40px}.item .dot{left:5px;width:14px;height:14px}.item .date{position:static;text-align:left;margin-bottom:2px;font-weight:600;color:#374151}.era-tag{position:static}}
+/* 详情页 */
+.back{display:inline-block;margin:18px 0 6px;color:#6b7280;text-decoration:none;font-size:14px}
+.back:hover{color:#111827}
+.article{background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:30px 34px;margin:10px 0 34px}
+.article h1{font-size:23px;margin-bottom:10px}
+.article .meta{display:flex;align-items:center;gap:10px;margin-bottom:18px;flex-wrap:wrap}
+.article .date-line{color:#6b7280;font-size:14px}
+.sum-card{background:#f8fafc;border-left:3px solid #111827;border-radius:0 10px 10px 0;padding:14px 18px;margin:6px 0 22px;font-size:15px;color:#374151}
+.sec{margin-top:24px}
+.sec h2{font-size:16px;font-weight:700;color:#111827;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid #eef0f2}
+.sec ul{list-style:none}
+.sec li{position:relative;padding:7px 0 7px 20px;font-size:14.5px;color:#374151;border-bottom:1px dashed #f0f1f3}
+.sec li:last-child{border-bottom:none}
+.sec li::before{content:"";position:absolute;left:2px;top:15px;width:7px;height:7px;border-radius:2px;background:#9ca3af}
+.related a{color:#2563eb;text-decoration:none;font-size:14px;display:block;padding:4px 0}
+.related a:hover{text-decoration:underline}
+.nav-bottom{display:flex;justify-content:space-between;gap:12px;margin-bottom:40px;font-size:14px}
+.nav-bottom a{color:#2563eb;text-decoration:none;padding:8px 14px;border:1px solid #d1d5db;border-radius:8px;background:#fff;max-width:48%}
+.nav-bottom a:hover{border-color:#111827;color:#111827}
+.nav-bottom .disabled{color:#c6c9ce;border-color:#e8eaec;pointer-events:none}
+</style></head>
+<body>
+<div class="wrap">
+<a class="back" href="index.html">← 返回总时间轴</a>
+<article class="article">
+<h1>表达的限制与隐性知识</h1>
+<div class="meta">
+<span class="badge" style="background:#fef3c7;color:#92400e">AI哲学/认知</span>
+<span class="date-line">2025-12-12 晚</span>
+</div>
+<div class="sum-card">AI 能处理好订单却说不清&quot;为什么能处理好&quot;——用户由此提出：未来人机交互的核心是表达；隐性知识也许可以转换成显性知识。代码还原不出 AI 能力，LLM vs 传统程序的结构差异被揭开。</div>
+<div class="sec"><h2>关键洞见</h2><ul><li>AI 能做得好但说不清 = 知识诅咒的 AI 版本</li><li>LLM（整体理解/模糊匹配/上下文学习）vs 代码（线性/确定性）</li><li>&quot;隐性知识也许可以转换成显性知识&quot;——用户超越 AI 框架</li><li>&quot;未来人机交互的核心是表达&quot;——伏笔：Datawhale 投稿选题</li><li>双轨学习计划诞生（理论 + 实操并行）</li></ul></div>
+<div class="sec related"><h2>关联归档</h2><a href="2025年12月12日_AI订单整理自动化与Cursor入门.html">AI订单整理自动化与Cursor入门 <span style="color:#9ca3af;font-size:12px">（2025-12-12）</span></a><a href="2026年3月10日-18日_订单自动化流水线实战.html">订单自动化流水线实战 <span style="color:#9ca3af;font-size:12px">（2026-03-10 ~ 03-18）</span></a><a href="2026年2月28日_Datawhale社区故事撰写与双项目展示.html">Datawhale社区故事撰写与双项目展示 <span style="color:#9ca3af;font-size:12px">（2026-02-28）</span></a></div>
+</article>
+<nav class="nav-bottom"><a href="2025年12月12日_AI订单整理自动化与Cursor入门.html">← AI订单整理自动化与Cursor入门</a><a href="2025年3月-2026年3月_边界母题汇总_自我指涉对称破缺与不可计算.html">边界母题汇总：自我指涉·对称破缺·不可计算 →</a></nav>
+<footer class="site">对话整理 · 39 篇归档 · 第 25 篇 · 五层模板整理</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>对话整理 · 总时间轴</title><meta name="description" content="39篇AI对话归档的总时间轴与导航"><style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei","Hiragino Sans GB",sans-serif;background:#f7f7f8;color:#1f2328;line-height:1.7;-webkit-font-smoothing:antialiased}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px}
+header.site{background:#fff;border-bottom:1px solid #e5e7eb;padding:28px 0 22px}
+h1{font-size:26px;font-weight:700;letter-spacing:.5px}
+.sub{color:#6b7280;font-size:14px;margin-top:6px}
+.stats{display:flex;gap:24px;margin-top:16px;flex-wrap:wrap}
+.stat b{font-size:20px;color:#111827;display:block}
+.stat span{font-size:12px;color:#6b7280}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 4px}
+.chip{cursor:pointer;border:1px solid #d1d5db;background:#fff;color:#374151;padding:4px 12px;border-radius:999px;font-size:13px;transition:all .15s}
+.chip.active{background:#111827;color:#fff;border-color:#111827}
+.chip:hover{border-color:#9ca3af}
+.timeline{position:relative;padding:16px 0 40px}
+.timeline::before{content:"";position:absolute;left:88px;top:8px;bottom:8px;width:2px;background:#e5e7eb}
+.era{margin-top:34px;position:relative}
+.era-tag{position:sticky;top:0;z-index:5;background:linear-gradient(90deg,#111827,#374151);color:#fff;display:inline-block;padding:5px 16px;border-radius:999px;font-size:13px;font-weight:600;letter-spacing:1px;box-shadow:0 2px 8px rgba(0,0,0,.12);margin-bottom:18px}
+.item{position:relative;padding:14px 0 14px 118px}
+.item .dot{position:absolute;left:81px;top:24px;width:16px;height:16px;border-radius:50%;background:#fff;border:3px solid #111827}
+.item .date{position:absolute;left:0;top:20px;width:76px;text-align:right;font-size:12.5px;color:#6b7280;font-variant-numeric:tabular-nums;line-height:1.4}
+.card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:16px 18px;transition:box-shadow .15s,border-color .15s}
+.card:hover{box-shadow:0 4px 16px rgba(0,0,0,.07);border-color:#d1d5db}
+.card h3{font-size:16.5px;font-weight:600;color:#111827}
+.card a.title{color:inherit;text-decoration:none}
+.card a.title:hover{color:#2563eb}
+.card .meta{display:flex;align-items:center;gap:8px;margin:6px 0 8px;flex-wrap:wrap}
+.card .summary{font-size:14px;color:#4b5563}
+footer.site{padding:26px 0 40px;color:#9ca3af;font-size:12.5px;text-align:center;border-top:1px solid #e5e7eb;margin-top:10px}
+@media(max-width:640px){.timeline::before{left:12px}.item{padding-left:40px}.item .dot{left:5px;width:14px;height:14px}.item .date{position:static;text-align:left;margin-bottom:2px;font-weight:600;color:#374151}.era-tag{position:static}}
+/* 详情页 */
+.back{display:inline-block;margin:18px 0 6px;color:#6b7280;text-decoration:none;font-size:14px}
+.back:hover{color:#111827}
+.article{background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:30px 34px;margin:10px 0 34px}
+.article h1{font-size:23px;margin-bottom:10px}
+.article .meta{display:flex;align-items:center;gap:10px;margin-bottom:18px;flex-wrap:wrap}
+.article .date-line{color:#6b7280;font-size:14px}
+.sum-card{background:#f8fafc;border-left:3px solid #111827;border-radius:0 10px 10px 0;padding:14px 18px;margin:6px 0 22px;font-size:15px;color:#374151}
+.sec{margin-top:24px}
+.sec h2{font-size:16px;font-weight:700;color:#111827;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid #eef0f2}
+.sec ul{list-style:none}
+.sec li{position:relative;padding:7px 0 7px 20px;font-size:14.5px;color:#374151;border-bottom:1px dashed #f0f1f3}
+.sec li:last-child{border-bottom:none}
+.sec li::before{content:"";position:absolute;left:2px;top:15px;width:7px;height:7px;border-radius:2px;background:#9ca3af}
+.related a{color:#2563eb;text-decoration:none;font-size:14px;display:block;padding:4px 0}
+.related a:hover{text-decoration:underline}
+.nav-bottom{display:flex;justify-content:space-between;gap:12px;margin-bottom:40px;font-size:14px}
+.nav-bottom a{color:#2563eb;text-decoration:none;padding:8px 14px;border:1px solid #d1d5db;border-radius:8px;background:#fff;max-width:48%}
+.nav-bottom a:hover{border-color:#111827;color:#111827}
+.nav-bottom .disabled{color:#c6c9ce;border-color:#e8eaec;pointer-events:none}
+</style></head>
+<body>
+<header class="site"><div class="wrap">
+<h1>对话整理 · 总时间轴</h1>
+<div class="sub">把散落的对话归档串成一条线：按时间线浏览，按标签筛选，点击任意条目进入概况页</div>
+<div class="stats">
+<div class="stat"><b>39</b><span>篇归档</span></div>
+<div class="stat"><b>2024.07 → 2026.07</b><span>时间跨度</span></div>
+<div class="stat"><b>12/14/13</b><span>2024/2025/2026 各年篇数</span></div>
+</div>
+</div></header>
+<div class="wrap">
+<div class="filters"><button class="chip active" data-tag="all">全部</button><button class="chip" data-tag="physics">物理/数学 8</button><button class="chip" data-tag="aiphil">AI哲学/认知 13</button><button class="chip" data-tag="aieng">AI工程/工具 2</button><button class="chip" data-tag="work">工作/运营 5</button><button class="chip" data-tag="reading">阅读/思想史 6</button><button class="chip" data-tag="method">方法论/系统 4</button><button class="chip" data-tag="self">自我认知 1</button></div>
+<div class="timeline"><div class="era"><span class="era-tag">2024 · 萌芽：AI哲学与数学直觉</span><div class="item" data-tag="physics">
+<div class="dot"></div><div class="date">2024-07-19</div>
+<div class="card"><h3><a class="title" href="2024-07-19_啤酒瓶回收最优解问题.html">啤酒瓶回收最优解问题</a></h3>
+<div class="meta"><span class="badge" style="background:#e8f0fe;color:#1a56db">物理/数学</span><span style="color:#9ca3af;font-size:12.5px">2024-07-19_啤酒瓶回收最优解问题</span></div>
+<div class="summary">GPT-4.0 连续三次回避&quot;最终数字&quot;，用户追出&quot;最优解不一定是完美的&quot;——85 瓶是否真最优？10 的倍数为何每瓶成本更低（0.4X vs 0.4059X）？一场关于&quot;最优解定义&quot;的数学博弈。</div></div></div><div class="item" data-tag="work">
+<div class="dot"></div><div class="date">2024-08-04–09-04</div>
+<div class="card"><h3><a class="title" href="2024-08-04至09-04_AI学习与运营助教实践对话整理.html">AI学习与运营助教实践</a></h3>
+<div class="meta"><span class="badge" style="background:#fce7f3;color:#9d174d">工作/运营</span><span style="color:#9ca3af;font-size:12.5px">2024-08-04至09-04_AI学习与运营助教实践对话整理</span></div>
+<div class="summary">用户首次把&quot;意识产生原理写入大模型&quot;的哲学命题与 AI 工程实践压缩进同一段对话，同时开启运营助教实操——&quot;e 创造了数学中的和谐，AI 工作中是否有 e 这种元素？&quot;</div></div></div><div class="item" data-tag="aiphil">
+<div class="dot"></div><div class="date">2024-09-06–09-09</div>
+<div class="card"><h3><a class="title" href="2024-09-06至09-09_概率论与AI可解释性学习对话整理.html">概率论与AI可解释性学习</a></h3>
+<div class="meta"><span class="badge" style="background:#fef3c7;color:#92400e">AI哲学/认知</span><span style="color:#9ca3af;font-size:12.5px">2024-09-06至09-09_概率论与AI可解释性学习对话整理</span></div>
+<div class="summary">用户提出&quot;很多技术概念不需要深刻了解，只需能描述问题让 AI 解决&quot;——把&quot;学习的目的&quot;从掌握知识重新定义为具备描述问题的能力，并追问可解释性是否真的可解。</div></div></div><div class="item" data-tag="aiphil">
+<div class="dot"></div><div class="date">2024-09-14–09-23</div>
+<div class="card"><h3><a class="title" href="2024-09-14至09-23_大模型技术与创造性思维对话整理.html">大模型技术与创造性思维</a></h3>
+<div class="meta"><span class="badge" style="background:#fef3c7;color:#92400e">AI哲学/认知</span><span style="color:#9ca3af;font-size:12.5px">2024-09-14至09-23_大模型技术与创造性思维对话整理</span></div>
+<div class="summary">以 Oliver Reichenstein 的 &quot;AI doesn't think. AI enables action without thinking.&quot; 为引，讨论 AI 伦理与人类独特性——&quot;如果 AI 发明了人类而非人类发明了 AI&quot;的倒置叙事。</div></div></div><div class="item" data-tag="aiphil">
+<div class="dot"></div><div class="date">2024-09-14–09-23</div>
+<div class="card"><h3><a class="title" href="2024-09-14至09-23_大模型架构与创造性思维对话整理.html">大模型架构与创造性思维</a></h3>
+<div class="meta"><span class="badge" style="background:#fef3c7;color:#92400e">AI哲学/认知</span><span style="color:#9ca3af;font-size:12.5px">2024-09-14至09-23_大模型架构与创造性思维对话整理</span></div>
+<div class="summary">同一篇 Reichenstein 文章的架构视角拆解：AI 不思考、行动无需思考，触发对创造、控制、自由意志的根本性重新思考——AI 发明人类的倒置。</div></div></div><div class="item" data-tag="aiphil">
+<div class="dot"></div><div class="date">2024-09-15–09-23</div>
+<div class="card"><h3><a class="title" href="2024-09-15至09-23_大模型学习与AI哲学思考对话整理.html">大模型学习与AI哲学思考</a></h3>
+<div class="meta"><span class="badge" style="background:#fef3c7;color:#92400e">AI哲学/认知</span><span style="color:#9ca3af;font-size:12.5px">2024-09-15至09-23_大模型学习与AI哲学思考对话整理</span></div>
+<div class="summary">&quot;如果 AI 发明了人类而非人类发明了 AI&quot;——用户把&quot;人类创造 AI&quot;的常规叙事完全翻转，连续对话追问创造、控制与自由意志。</div></div></div><div class="item" data-tag="aiphil">
+<div class="dot"></div><div class="date">2024-09-23</div>
+<div class="card"><h3><a class="title" href="2024-09-23_创造性思维与AI哲学对话整理.html">创造性思维与AI哲学</a></h3>
+<div class="meta"><span class="badge" style="background:#fef3c7;color:#92400e">AI哲学/认知</span><span style="color:#9ca3af;font-size:12.5px">2024-09-23_创造性思维与AI哲学对话整理</span></div>
+<div class="summary">&quot;How to Build Worlds&quot; 的三个创造性思维方法——连接、倒置、扭曲——将创造力从神秘天赋转化为可操作的方法，并追问：人类创造力与 AI 生成的本质区别能否被形式化？</div></div></div><div class="item" data-tag="aiphil">
+<div class="dot"></div><div class="date">2024-09-25–10-15</div>
+<div class="card"><h3><a class="title" href="2024-09-25至10-15_深度学习与AI哲学多主题对话整理.html">深度学习与AI哲学多主题</a></h3>
+<div class="meta"><span class="badge" style="background:#fef3c7;color:#92400e">AI哲学/认知</span><span style="color:#9ca3af;font-size:12.5px">2024-09-25至10-15_深度学习与AI哲学多主题对话整理</span></div>
+<div class="summary">彩票假设、单层网络逆向思考、计算不可约性与 O1 思考时间、沃尔弗拉姆&quot;规则空间&quot;——多主题碰撞，首次出现后来贯穿两年的核心概念群。</div></div></div><div class="item" data-tag="physics">
+<div class="dot"></div><div class="date">2024-11-21</div>
+<div class="card"><h3><a class="title" href="2024-11-21_傅立叶级数跨领域思维对话整理.html">傅立叶级数跨领域思维</a></h3>
+<div class="meta"><span class="badge" style="background:#e8f0fe;color:#1a56db">物理/数学</span><span style="color:#9ca3af;font-size:12.5px">2024-11-21_傅立叶级数跨领域思维对话整理</span></div>
+<div class="summary">用户以&quot;我是学画画的，你尝试另一个角度解释&quot;开启对话——傅立叶变换作为数据的另一种表现形式，&quot;更易于发现规律和归纳总结&quot;，视角转换成为跨领域理解数学的核心机制。</div></div></div><div class="item" data-tag="reading">
+<div class="dot"></div><div class="date">2024-11-23–11-25</div>
+<div class="card"><h3><a class="title" href="2024-11-23_伏尔泰与莱布尼茨哲学思想对话整理.html">伏尔泰与莱布尼茨哲学思想</a></h3>
+<div class="meta"><span class="badge" style="background:#ede9fe;color:#5b21b6">阅读/思想史</span><span style="color:#9ca3af;font-size:12.5px">2024-11-23_伏尔泰与莱布尼茨哲学思想对话整理</span></div>
+<div class="summary">伏尔泰&quot;看看谁是你不能批评的人&quot;与莱布尼茨单子论——用户直觉把单子论接到沃尔弗拉姆的 Ruliad：&quot;不同的物质都用各自不同的方式感知规则，这种感知就像是独特的视角与经验。&quot;</div></div></div><div class="item" data-tag="physics">
+<div class="dot"></div><div class="date">2024-11-25–11-28</div>
+<div class="card"><h3><a class="title" href="2024-11-25至11-28_玻尔兹曼分布与时空哲学对话整理.html">玻尔兹曼分布与时空哲学</a></h3>
+<div class="meta"><span class="badge" style="background:#e8f0fe;color:#1a56db">物理/数学</span><span style="color:#9ca3af;font-size:12.5px">2024-11-25至11-28_玻尔兹曼分布与时空哲学对话整理</span></div>
+<div class="summary">玻尔兹曼分布&quot;能量最小与熵最大统一&quot;、时间不可逆性与微观可逆性的矛盾、海德格尔&quot;时间是存在的地平线&quot;、莫比乌斯环/克莱因瓶——热力学与时空哲学的碰撞。</div></div></div><div class="item" data-tag="aiphil">
+<div class="dot"></div><div class="date">2024-11-29–12-06</div>
+<div class="card"><h3><a class="title" href="2024-11-29至12-06_宇宙意识与AI融合阶段对话整理.html">宇宙意识与AI融合阶段</a></h3>
+<div class="meta"><span class="badge" style="background:#fef3c7;color:#92400e">AI哲学/认知</span><span style="color:#9ca3af;font-size:12.5px">2024-11-29至12-06_宇宙意识与AI融合阶段对话整理</span></div>
+<div class="summary">&quot;神不是全知的&quot;&quot;我们组成了神，而非神创造了我们&quot;&quot;二维画作与三维观察者&quot;&quot;意识分裂成无数碎片进入生命体&quot;——全息宇宙理论、量子意识假说与 AI 融合的宏大想象。</div></div></div></div><div class="era"><span class="era-tag">2025 · 扩展：物理追问与工程实践</span><div class="item" data-tag="work">
+<div class="dot"></div><div class="date">2025-02-25</div>
+<div class="card"><h3><a class="title" href="2025-02-25_客户长期合作潜力评估体系构建对话整理.html">客户长期合作潜力评估体系</a></h3>
+<div class="meta"><span class="badge" style="background:#fce7f3;color:#9d174d">工作/运营</span><span style="color:#9ca3af;font-size:12.5px">2025-02-25_客户长期合作潜力评估体系构建对话整理</span></div>
+<div class="summary">&quot;我可以说是直觉吗&quot;——用户把个人判断能力显性化：多个因素决定长久合作可能性，加上&quot;缘分/天时地利人和&quot;的不可控维度，主动构建评估体系，将隐性知识显性化。</div></div></div><div class="item" data-tag="physics">
+<div class="dot"></div><div class="date">2025-03-13</div>
+<div class="card"><h3><a class="title" href="2025-03-13_逻辑学与组合数学基础概念对话整理.html">逻辑学与组合数学基础概念</a></h3>
+<div class="meta"><span class="badge" style="background:#e8f0fe;color:#1a56db">物理/数学</span><span style="color:#9ca3af;font-size:12.5px">2025-03-13_逻辑学与组合数学基础概念对话整理</span></div>
+<div class="summary">&quot;怎么证明逆命题不一定为真&quot;&quot;只凭想象觉得这不太可能会相等&quot;——用户对逻辑逆命题、组合数对称性、递归公式的形式困惑，全部要求&quot;形象举例说明&quot;。</div></div></div><div class="item" data-tag="aiphil">
+<div class="dot"></div><div class="date">2025-03-11–03-23</div>
+<div class="card"><h3><a class="title" href="2025年3月11日-23日_从Skill思维到计算不可约深度学习.html">从Skill思维到计算不可约深度学习</a></h3>
+<div class="meta"><span class="badge" style="background:#fef3c7;color:#92400e">AI哲学/认知</span><span style="color:#9ca3af;font-size:12.5px">2025年3月11日-23日_从Skill思维到计算不可约深度学习</span></div>
+<div class="summary">一场关于规则、复杂性与自由意志的深度学习：Skill 思维如何通向计算不可约——有些系统无法被压缩、预测或绕过，复杂性本身不可约。</div></div></div><div class="item" data-tag="method">
+<div class="dot"></div><div class="date">2025-03-26–03-29</div>
+<div class="card"><h3><a class="title" href="2025年3月26日-29日_心态矩阵催化效应思维工具开发.html">心态矩阵催化效应思维工具开发</a></h3>
+<div class="meta"><span class="badge" style="background:#e0f2fe;color:#0e7490">方法论/系统</span><span style="color:#9ca3af;font-size:12.5px">2025年3月26日-29日_心态矩阵催化效应思维工具开发</span></div>
+<div class="summary">从概念提出到可视化训练工具：心态矩阵催化效应——2025 年的一个想法，2026 年 7 月成为 05-创作档案的第一个项目落地。</div></div></div><div class="item" data-tag="physics">
+<div class="dot"></div><div class="date">2025-03-30–03-31</div>
+<div class="card"><h3><a class="title" href="2025年3月30日-31日_黑白灰映射与熵的定量分析.html">黑白灰映射与熵的定量分析</a></h3>
+<div class="meta"><span class="badge" style="background:#e8f0fe;color:#1a56db">物理/数学</span><span style="color:#9ca3af;font-size:12.5px">2025年3月30日-31日_黑白灰映射与熵的定量分析</span></div>
+<div class="summary">映射设计才是关键——黑白灰三层次映射 Rule 30 元胞自动机，跑出自相似性（分析图里出现被分析对象的图案），并定量探索香农熵 λ 与时间变化率。</div></div></div><div class="item" data-tag="reading">
+<div class="dot"></div><div class="date">2025-08-05–08-06</div>
+<div class="card"><h3><a class="title" href="2025-08-05_基辛格人工智能与人类价值.html">基辛格《人工智能与人类价值》阅读</a></h3>
+<div class="meta"><span class="badge" style="background:#ede9fe;color:#5b21b6">阅读/思想史</span><span style="color:#9ca3af;font-size:12.5px">2025-08-05_基辛格人工智能与人类价值</span></div>
+<div class="summary">基辛格&quot;含糊不清可以是培育对话的沃土&quot;——当 AI 优势格局不明朗时，全球领导人反而有动力在人类共存基础上对话；&quot;当机器在效率和结果上超越人类时，人类价值体现在过程的美感、创造的优雅和精神的高度上。&quot;</div></div></div><div class="item" data-tag="reading">
+<div class="dot"></div><div class="date">2025-08-12</div>
+<div class="card"><h3><a class="title" href="2025-08-12_零和与正和博弈概念对话整理.html">零和与正和博弈概念</a></h3>
+<div class="meta"><span class="badge" style="background:#ede9fe;color:#5b21b6">阅读/思想史</span><span style="color:#9ca3af;font-size:12.5px">2025-08-12_零和与正和博弈概念对话整理</span></div>
+<div class="summary">前一天刚读完基辛格，用户随即追问：零和是分蛋糕，正和是做蛋糕；而现实世界是&quot;既分蛋糕又做蛋糕&quot;的复合体——机会窗口的前提是从零和切换成正和。</div></div></div><div class="item" data-tag="reading">
+<div class="dot"></div><div class="date">2025-08-21–2026-06-11</div>
+<div class="card"><h3><a class="title" href="2025年8月21日-2026年6月11日_爱因斯坦科学哲学与量子先于相对论思想实验.html">爱因斯坦科学哲学与量子先于相对论思想实验</a></h3>
+<div class="meta"><span class="badge" style="background:#ede9fe;color:#5b21b6">阅读/思想史</span><span style="color:#9ca3af;font-size:12.5px">2025年8月21日-2026年6月11日_爱因斯坦科学哲学与量子先于相对论思想实验</span></div>
+<div class="summary">对应原理 + 反事实思想实验：如果量子力学先于相对论出现，物理学史会怎样？用户追问的已不是结论，而是&quot;爱因斯坦如何思考&quot;。</div></div></div><div class="item" data-tag="physics">
+<div class="dot"></div><div class="date">2025-08-30</div>
+<div class="card"><h3><a class="title" href="2025-08-30_超对称性与量子涨落概念对话整理.html">超对称性与量子涨落</a></h3>
+<div class="meta"><span class="badge" style="background:#e8f0fe;color:#1a56db">物理/数学</span><span style="color:#9ca3af;font-size:12.5px">2025-08-30_超对称性与量子涨落概念对话整理</span></div>
+<div class="summary">&quot;为什么空间小尺度下的量子涨落，会因为超对称性有所减弱&quot;——费米子/玻色子配对机制：量子涨落的噪声被超对称&quot;成对的镜子&quot;抵消，但只在高能（小尺度）时完美，低能时镜子碎了（破缺）。</div></div></div><div class="item" data-tag="physics">
+<div class="dot"></div><div class="date">2025-11-08</div>
+<div class="card"><h3><a class="title" href="2025-11-08_宇宙能量守恒概念对话整理.html">宇宙能量守恒概念</a></h3>
+<div class="meta"><span class="badge" style="background:#e8f0fe;color:#1a56db">物理/数学</span><span style="color:#9ca3af;font-size:12.5px">2025-11-08_宇宙能量守恒概念对话整理</span></div>
+<div class="summary">&quot;从宇宙全局来看，为什么不存在能量守恒的概念&quot;——诺特定理揭示：能量守恒不是宇宙的绝对法则，而是局部近似，它的成立依赖一个宇宙不再拥有的性质：时间平移对称性。</div></div></div><div class="item" data-tag="work">
+<div class="dot"></div><div class="date">2025-12-11–2026-02-28</div>
+<div class="card"><h3><a class="title" href="2025年12月11日-2026年2月28日_Datawhale运营助教筹备与社区故事.html">Datawhale运营助教筹备与社区故事</a></h3>
+<div class="meta"><span class="badge" style="background:#fce7f3;color:#9d174d">工作/运营</span><span style="color:#9ca3af;font-size:12.5px">2025年12月11日-2026年2月28日_Datawhale运营助教筹备与社区故事</span></div>
+<div class="summary">Datawhale 身份三级跃迁：报名运营助教（12月）→ 正式成员（2/21）→ 以成员身份分享成长故事（2/28）。&quot;许愿瓶&quot;机制、开营话术两轮被打回、AI 写不出&quot;真挚&quot;的现场解剖。</div></div></div><div class="item" data-tag="aieng">
+<div class="dot"></div><div class="date">2025-12-12</div>
+<div class="card"><h3><a class="title" href="2025年12月12日_AI订单整理自动化与Cursor入门.html">AI订单整理自动化与Cursor入门</a></h3>
+<div class="meta"><span class="badge" style="background:#d1fae5;color:#065f46">AI工程/工具</span><span style="color:#9ca3af;font-size:12.5px">2025年12月12日_AI订单整理自动化与Cursor入门</span></div>
+<div class="summary">微信群的订单洪流是真实需求：POE/Claude/VSCode/API 概念澄清后，定制三表方案 → 用真实订单测试 → 两轮纠错（软姓名归属、县级地址规则），达成&quot;长期订单处理伙伴&quot;约定。</div></div></div><div class="item" data-tag="aiphil">
+<div class="dot"></div><div class="date">2025-12-12 晚</div>
+<div class="card"><h3><a class="title" href="2025年12月12日晚_表达的限制与隐性知识.html">表达的限制与隐性知识</a></h3>
+<div class="meta"><span class="badge" style="background:#fef3c7;color:#92400e">AI哲学/认知</span><span style="color:#9ca3af;font-size:12.5px">2025年12月12日晚_表达的限制与隐性知识</span></div>
+<div class="summary">AI 能处理好订单却说不清&quot;为什么能处理好&quot;——用户由此提出：未来人机交互的核心是表达；隐性知识也许可以转换成显性知识。代码还原不出 AI 能力，LLM vs 传统程序的结构差异被揭开。</div></div></div><div class="item" data-tag="method">
+<div class="dot"></div><div class="date">2025-03–2026-03</div>
+<div class="card"><h3><a class="title" href="2025年3月-2026年3月_边界母题汇总_自我指涉对称破缺与不可计算.html">边界母题汇总：自我指涉·对称破缺·不可计算</a></h3>
+<div class="meta"><span class="badge" style="background:#e0f2fe;color:#0e7490">方法论/系统</span><span style="color:#9ca3af;font-size:12.5px">2025年3月-2026年3月_边界母题汇总_自我指涉对称破缺与不可计算</span></div>
+<div class="summary">跨 13 个月、8+ 篇归档的三条母题线：自我指涉（逻辑的边界）、对称破缺（物理的边界）、不可计算（计算的边界）——边界外的领域不是&quot;暂时做不到&quot;，而是&quot;原理上不可能&quot;。</div></div></div></div><div class="era"><span class="era-tag">2026 · 成型：方法论与系统化</span><div class="item" data-tag="work">
+<div class="dot"></div><div class="date">2026-02-28</div>
+<div class="card"><h3><a class="title" href="2026年2月28日_Datawhale社区故事撰写与双项目展示.html">Datawhale社区故事撰写与双项目展示</a></h3>
+<div class="meta"><span class="badge" style="background:#fce7f3;color:#9d174d">工作/运营</span><span style="color:#9ca3af;font-size:12.5px">2026年2月28日_Datawhale社区故事撰写与双项目展示</span></div>
+<div class="summary">单日完整创作过程（12:06-16:59）：《一个学艺术的人，闯进了 AI 的世界》——组织负责人 4 点反馈把&quot;真挚→可发布&quot;，用户补上克制但有分量的自我证明，HTML 项目展示页 + 飞书发布链路完成。</div></div></div><div class="item" data-tag="aieng">
+<div class="dot"></div><div class="date">2026-03-10–03-18</div>
+<div class="card"><h3><a class="title" href="2026年3月10日-18日_订单自动化流水线实战.html">订单自动化流水线实战</a></h3>
+<div class="meta"><span class="badge" style="background:#d1fae5;color:#065f46">AI工程/工具</span><span style="color:#9ca3af;font-size:12.5px">2026年3月10日-18日_订单自动化流水线实战</span></div>
+<div class="summary">从需求到&quot;契约+IR+回归样例&quot;：用户第一次把完整业务流程和盘托出，自己写出&quot;契约 + IR + 回归样例&quot;（全篇最高光）——14 列月度分销商结算、流程五段式、本地脚本而非 RPA 的选型。</div></div></div><div class="item" data-tag="physics">
+<div class="dot"></div><div class="date">2026-03-15–03-17</div>
+<div class="card"><h3><a class="title" href="2026年3月15日-17日_微积分图灵机与停机问题.html">微积分、图灵机与停机问题</a></h3>
+<div class="meta"><span class="badge" style="background:#e8f0fe;color:#1a56db">物理/数学</span><span style="color:#9ca3af;font-size:12.5px">2026年3月15日-17日_微积分图灵机与停机问题</span></div>
+<div class="summary">三天跨两大主题：微积分&quot;一个问题、两类操作、一个定理&quot;+ 图灵机三件套与停机问题反证——&quot;接收人是学艺术的&quot;定义调性，复杂性来自叠加不来自神奇。</div></div></div><div class="item" data-tag="work">
+<div class="dot"></div><div class="date">2026-05-21</div>
+<div class="card"><h3><a class="title" href="2026年5月21日_销售招募工作步骤系统.html">销售招募工作步骤系统</a></h3>
+<div class="meta"><span class="badge" style="background:#fce7f3;color:#9d174d">工作/运营</span><span style="color:#9ca3af;font-size:12.5px">2026年5月21日_销售招募工作步骤系统</span></div>
+<div class="summary">产品上架完整要素（魔术臂章定制）、HTML 系统迭代三部曲、PPO 训练日志排障——把散落的业务步骤固化成&quot;工作步骤系统&quot;。</div></div></div><div class="item" data-tag="method">
+<div class="dot"></div><div class="date">2026-05-21–06-30</div>
+<div class="card"><h3><a class="title" href="2026年5月21日-6月30日_对话记录方法论与直觉转译框架.html">对话记录方法论与直觉转译框架</a></h3>
+<div class="meta"><span class="badge" style="background:#e0f2fe;color:#0e7490">方法论/系统</span><span style="color:#9ca3af;font-size:12.5px">2026年5月21日-6月30日_对话记录方法论与直觉转译框架</span></div>
+<div class="summary">五层模板的诞生地：外脑接口思想（5/21）→ 通用对话框架 → 法拉第笔记本（6/30）→ GPT-5.4&quot;直觉采矿→结构转译&quot;四层框架 → 完整重写示范。</div></div></div><div class="item" data-tag="self">
+<div class="dot"></div><div class="date">2026-05-23–07-10</div>
+<div class="card"><h3><a class="title" href="2026年5月23日-7月10日_注意力满载与经历的隐性价值.html">注意力满载与经历的隐性价值</a></h3>
+<div class="meta"><span class="badge" style="background:#fee2e2;color:#991b1b">自我认知</span><span style="color:#9ca3af;font-size:12.5px">2026年5月23日-7月10日_注意力满载与经历的隐性价值</span></div>
+<div class="summary">三块拼图一条主线：注意力 x 模型（x+上课认真听讲=1）→ 升华时刻=涌现（frisson + 默认模式网络与任务执行网络共激活）→ 经历的价值（浪花与洋流、信念vs方法）——&quot;很少哭不是不感动，而是注意力太散没被填满&quot;。</div></div></div><div class="item" data-tag="aiphil">
+<div class="dot"></div><div class="date">2026-06-11</div>
+<div class="card"><h3><a class="title" href="2026年6月11日_概念的统计涌现与逻辑构造.html">概念的统计涌现与逻辑构造</a></h3>
+<div class="meta"><span class="badge" style="background:#fef3c7;color:#92400e">AI哲学/认知</span><span style="color:#9ca3af;font-size:12.5px">2026年6月11日_概念的统计涌现与逻辑构造</span></div>
+<div class="summary">爱因斯坦的概念观与 LLM 结构同构：涌现是统计的还是逻辑的？更深一层——逻辑本身是否也是统计涌现的产物？&quot;概念的深度=情感具身&quot;（Claude-4.6 独有增量）。</div></div></div><div class="item" data-tag="reading">
+<div class="dot"></div><div class="date">2026-06-17</div>
+<div class="card"><h3><a class="title" href="2026年6月17日_爱因斯坦读一种新科学.html">爱因斯坦读《一种新科学》</a></h3>
+<div class="meta"><span class="badge" style="background:#ede9fe;color:#5b21b6">阅读/思想史</span><span style="color:#9ca3af;font-size:12.5px">2026年6月17日_爱因斯坦读一种新科学</span></div>
+<div class="summary">两种心智模式的对话：爱因斯坦的《自述》与沃尔弗拉姆的规则世界——&quot;这里的简单是哪种简单？&quot;当&quot;计算&quot;取代&quot;理解&quot;，概念危机浮现；一个想象的对话，两种奇迹。</div></div></div><div class="item" data-tag="aiphil">
+<div class="dot"></div><div class="date">2026-06-29–07-05</div>
+<div class="card"><h3><a class="title" href="2026年6月29日-7月5日_智能意识感知哲学对话与双AI分析.html">智能、意识与感知：双AI分析</a></h3>
+<div class="meta"><span class="badge" style="background:#fef3c7;color:#92400e">AI哲学/认知</span><span style="color:#9ca3af;font-size:12.5px">2026年6月29日-7月5日_智能意识感知哲学对话与双AI分析</span></div>
+<div class="summary">与朋友的思想对话 + Claude-4.6 与 GPT-5.4 双 AI 分析：核心分歧&quot;智能是功能性的还是感知性的&quot;，&quot;表面高级 vs 真实密度&quot;的诊断——双 AI 分析风格对比成为元层资产。</div></div></div><div class="item" data-tag="method">
+<div class="dot"></div><div class="date">2026-06–07-25</div>
+<div class="card"><h3><a class="title" href="2026年6月-7月25日_个人数据记录系统搭建与双轨批注法.html">个人数据记录系统搭建与双轨批注法</a></h3>
+<div class="meta"><span class="badge" style="background:#e0f2fe;color:#0e7490">方法论/系统</span><span style="color:#9ca3af;font-size:12.5px">2026年6月-7月25日_个人数据记录系统搭建与双轨批注法</span></div>
+<div class="summary">Obsidian 个人数据记录系统：00-收件箱两阶段采集、五模块定制模板（认知画像驱动）、iCloud 同步六步排障、【模块整理】触发协议——并发明&quot;双轨批注法&quot;（历史注释/现代补丁/本质变化）为朋友做成侦探式批注法 HTML 卡片。</div></div></div><div class="item" data-tag="aiphil">
+<div class="dot"></div><div class="date">2026-07-05–07-08</div>
+<div class="card"><h3><a class="title" href="2026年7月5日-8日_AI时代宣言辩证拆解与自我定位.html">AI时代宣言辩证拆解与自我定位</a></h3>
+<div class="meta"><span class="badge" style="background:#fef3c7;color:#92400e">AI哲学/认知</span><span style="color:#9ca3af;font-size:12.5px">2026年7月5日-8日_AI时代宣言辩证拆解与自我定位</span></div>
+<div class="summary">用户第一次把政治哲学式的文本批评方法用在当代 AI 领导者的宣言上：Amodei 用结构性权威（框架划定问题清单），Altman 用动势性权威（叙事制造不可阻挡感）——&quot;谦逊在这里不是放弃权威，而是生产权威&quot;。</div></div></div><div class="item" data-tag="aiphil">
+<div class="dot"></div><div class="date">2026-07-05–07-08</div>
+<div class="card"><h3><a class="title" href="2026年7月5日-8日_AI时代宣言GPT54逐句拆解与双AI对照.html">AI时代宣言GPT-5.4逐句拆解与双AI对照</a></h3>
+<div class="meta"><span class="badge" style="background:#fef3c7;color:#92400e">AI哲学/认知</span><span style="color:#9ca3af;font-size:12.5px">2026年7月5日-8日_AI时代宣言GPT54逐句拆解与双AI对照</span></div>
+<div class="summary">同一批宣言由 GPT-5.4 完整重拆：与 Claude 版（第19篇）的关键差异不是结论而是过程——六个核心洞见全部由用户先提出，&quot;科幻包袱=重新编码&quot;一段用户几乎独立完成完整批评。</div></div></div><div class="item" data-tag="reading">
+<div class="dot"></div><div class="date">2026-07-27</div>
+<div class="card"><h3><a class="title" href="2026年7月27日_爱因斯坦自述片断阅读准备与多AI认识论性格识别.html">爱因斯坦《自述片断》阅读准备与多AI认识论性格识别</a></h3>
+<div class="meta"><span class="badge" style="background:#ede9fe;color:#5b21b6">阅读/思想史</span><span style="color:#9ca3af;font-size:12.5px">2026年7月27日_爱因斯坦自述片断阅读准备与多AI认识论性格识别</span></div>
+<div class="summary">&quot;同一问题 × 三个 AI&quot;的认识论实验：普朗克 vs 爱因斯坦的镜像（AI-1 热情共鸣 / AI-2 结构化提炼 / AI-3 严谨型七层解剖），用户由此确立 AI 使用标准——&quot;既能理解我，又能让我看见自己尚未看到之处&quot;，并宣布直接阅读《自述片断》。</div></div></div></div></div>
+</div>
+<footer class="site">对话整理 · 39 篇归档 · 按「日期_标题」命名 · 五层模板整理</footer>
+<script>
+document.querySelectorAll('.chip').forEach(function(c){
+c.addEventListener('click',function(){
+document.querySelectorAll('.chip').forEach(function(x){x.classList.remove('active')});
+this.classList.add('active');
+var t=this.dataset.tag;
+document.querySelectorAll('.timeline .item').forEach(function(it){
+it.style.display=(t==='all'||it.dataset.tag===t)?'':'none';
+});
+});
+});
+</script>
+</body>
+</html>
