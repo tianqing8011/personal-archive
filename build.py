@@ -1,5 +1,5 @@
 from pathlib import Path
-from html import escape
+from html import escape, unescape
 import os
 import re
 import shutil
@@ -36,6 +36,7 @@ def inject_rich_navigation(output_folder, topic_title):
     """给一个丰富专题中的所有 HTML 页面加入统一导航。"""
 
     topic_home_file = output_folder / "index.html"
+    has_topic_home = topic_home_file.exists()
     archive_home_file = SITE_DIR / "index.html"
     navigation_css_file = STATIC_OUTPUT_DIR / "rich-nav.css"
 
@@ -49,11 +50,6 @@ def inject_rich_navigation(output_folder, topic_title):
         home_href = make_relative_url(
             html_file.parent,
             archive_home_file
-        )
-
-        topic_home_href = make_relative_url(
-            html_file.parent,
-            topic_home_file
         )
 
         css_href = make_relative_url(
@@ -86,23 +82,44 @@ def inject_rich_navigation(output_folder, topic_title):
             else:
                 print(f"警告：专题页面没有 </head>：{html_file}")
 
-        is_topic_home = (
-            html_file.resolve() == topic_home_file.resolve()
-        )
+        if has_topic_home:
+            page_title = topic_title
 
-        if is_topic_home:
-            topic_action = """
+            is_topic_home = (
+                html_file.resolve() == topic_home_file.resolve()
+            )
+
+            if is_topic_home:
+                topic_action = """
 <span class="pa-topic-nav__current">
     专题首页
 </span>
 """
-        else:
-            topic_action = f"""
+            else:
+                topic_home_href = make_relative_url(
+                    html_file.parent,
+                    topic_home_file
+                )
+
+                topic_action = f"""
 <a class="pa-topic-nav__link"
    href="{topic_home_href}">
     返回专题首页
 </a>
 """
+        else:
+            # 专题目录没有统一首页：从页面自身 <title> 取标题，仅保留返回个人档案
+            page_title = topic_title
+            title_match = re.search(
+                r"<title[^>]*>(.*?)</title>",
+                text,
+                flags=re.IGNORECASE | re.DOTALL
+            )
+
+            if title_match:
+                page_title = unescape(title_match.group(1).strip())
+
+            topic_action = ""
 
         navigation_html = f"""
 <nav class="pa-topic-nav"
@@ -115,7 +132,7 @@ def inject_rich_navigation(output_folder, topic_title):
     </a>
 
     <span class="pa-topic-nav__title">
-        {escape(topic_title)}
+        {escape(page_title)}
     </span>
 
     {topic_action}

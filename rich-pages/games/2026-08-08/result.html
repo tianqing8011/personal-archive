@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>天晴行会 · 守城胜利公告</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,'Microsoft YaHei','微软雅黑',PingFang SC,sans-serif;
+  background:#f4ede0;min-height:100vh;padding:14px;color:#2c1a00;
+}
+.wrap{max-width:780px;margin:0 auto}
+
+/* HEADER */
+.hd{
+  background:linear-gradient(135deg,#7c2200 0%,#c44800 40%,#e87818 65%,#c46000 85%,#7c2200 100%);
+  border-radius:14px 14px 0 0;
+  padding:28px 20px 24px;text-align:center;position:relative;overflow:hidden;
+}
+.hd::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% -5%, rgba(255,230,60,.22) 0%, transparent 58%);
+}
+.hd::after{
+  content:'⚔️';position:absolute;right:22px;bottom:14px;
+  font-size:58px;opacity:.09;line-height:1;
+}
+.hd-guild{
+  display:inline-block;background:rgba(0,0,0,.25);
+  color:rgba(255,230,150,.8);font-size:11px;
+  padding:3px 16px;border-radius:20px;letter-spacing:3px;
+  margin-bottom:12px;position:relative;border:1px solid rgba(255,200,80,.18);
+}
+.hd-trophy{font-size:46px;line-height:1;display:block;margin-bottom:10px;position:relative}
+.hd-title{
+  font-size:26px;font-weight:900;color:#fff8d8;
+  letter-spacing:3px;text-shadow:0 2px 10px rgba(0,0,0,.3);
+  position:relative;margin-bottom:6px;
+}
+.hd-date{font-size:12px;color:rgba(255,218,140,.6);position:relative}
+
+/* BODY */
+.body{
+  background:#fff;
+  border:1px solid #e8d5b0;border-top:none;
+  border-radius:0 0 14px 14px;
+  padding:20px 18px;
+}
+
+/* THANK YOU */
+.ty{
+  background:linear-gradient(135deg,#fffcf0,#fff8e6);
+  border:1px solid #f0d898;border-left:4px solid #d4880a;
+  border-radius:10px;padding:18px 18px 14px;margin-bottom:16px;
+  font-size:13.5px;line-height:2;color:#3a1e00;
+}
+.ty .opener{font-size:15.5px;font-weight:900;color:#8b1e00;margin-bottom:10px;line-height:1.6}
+.ty p{margin-bottom:10px}
+.ty p:last-of-type{margin-bottom:0}
+.ty strong{color:#b05800}
+.ty .sig{
+  margin-top:14px;padding-top:10px;
+  border-top:1px dashed #e8d090;
+  text-align:right;font-size:12px;color:#9a7030;
+}
+
+/* STATS */
+.stats{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.stat{
+  flex:1;min-width:100px;background:#fff;
+  border:1px solid #e8d5b0;border-top:3px solid #d4880a;
+  border-radius:10px;padding:12px 10px;text-align:center;
+  box-shadow:0 2px 6px rgba(0,0,0,.04);
+}
+.stat-l{font-size:10px;color:#c8a050;letter-spacing:1px;margin-bottom:4px}
+.stat-n{font-size:21px;font-weight:900;color:#b05800;line-height:1.1}
+.stat-u{font-size:11px;color:#9a7030;margin-top:2px}
+
+/* DIST */
+.dist{
+  background:linear-gradient(90deg,#fff4e0,#fff9f0);
+  border:1px solid #f0c878;border-radius:10px;
+  padding:13px 16px;margin-bottom:18px;
+  display:flex;align-items:center;gap:12px;
+}
+.dist-av{
+  width:46px;height:46px;
+  background:linear-gradient(135deg,#d4880a,#f0b830);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:22px;flex-shrink:0;
+  box-shadow:0 2px 8px rgba(180,120,0,.2);
+}
+.dist-t{font-size:14px;font-weight:800;color:#5a3000;margin-bottom:4px}
+.dist-d{font-size:12px;color:#9a6030;line-height:1.6}
+.dist-d strong{color:#b05800}
+
+/* TABLE */
+.tbl-hd{
+  font-size:12px;font-weight:700;letter-spacing:2px;
+  color:#9a7030;margin-bottom:10px;
+  display:flex;align-items:center;gap:6px;
+}
+.tbl-wrap{
+  border-radius:10px;border:1px solid #e8d5b0;
+  overflow:hidden;overflow-x:auto;
+}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+thead tr{background:#fdf3da}
+thead th{
+  padding:9px 10px;color:#9a7030;
+  font-weight:700;font-size:11px;letter-spacing:1px;
+  white-space:nowrap;border-bottom:2px solid #e8d090;text-align:left;
+}
+thead th.ctr{text-align:center}
+tbody tr{border-top:1px solid #f5ead0}
+tbody tr:hover{background:#fffbf0}
+td{padding:8px 10px;color:#3d2200;vertical-align:middle}
+td.ctr{text-align:center}
+
+.rank{
+  width:22px;height:22px;border-radius:50%;
+  display:inline-flex;align-items:center;justify-content:center;
+  font-size:10px;font-weight:800;
+}
+.r1{background:#ffd700;color:#4a2200;box-shadow:0 0 6px rgba(255,200,0,.45)}
+.r2{background:#b8b8b8;color:#222}
+.r3{background:#c87830;color:#fff}
+.rn{background:#f5ead0;color:#9a7030}
+
+.n-main{font-size:13px;font-weight:700;color:#2c1500}
+.n-sub{font-size:11px;color:#c09050;margin-top:1px}
+.oli-tag{
+  display:inline-block;background:#fff3dc;
+  border:1px solid #f0c060;color:#d4800a;
+  font-size:9px;padding:1px 6px;border-radius:10px;
+  margin-left:5px;font-weight:700;vertical-align:middle;
+}
+.jt{font-size:12px;font-variant-numeric:tabular-nums;color:#7a5020;white-space:nowrap}
+.jt-e{color:#c05000;font-weight:700}
+.dur-t{font-size:12px;font-variant-numeric:tabular-nums;color:#5a3200;font-weight:600;white-space:nowrap}
+.dur-bar{height:3px;background:#f5ead0;border-radius:2px;margin-top:4px;overflow:hidden;min-width:50px}
+.dur-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,#c87800,#ffd060)}
+.reward{font-size:13px;font-weight:800;color:#c87800;white-space:nowrap}
+.badge{
+  display:inline-block;
+  background:#fff3e0;border:1px solid #f0c870;
+  color:#d4800a;font-size:10px;
+  padding:2px 9px;border-radius:20px;white-space:nowrap;
+}
+
+/* FOOTER */
+.ft{
+  margin-top:18px;padding-top:14px;
+  border-top:1px dashed #e8d5b0;
+  text-align:center;font-size:12px;color:#c09050;line-height:2;
+}
+
+.back-btn{
+  display:inline-block;margin-bottom:12px;
+  background:linear-gradient(135deg,#c44800,#e87818);
+  color:#fff;text-decoration:none;font-weight:700;
+  padding:9px 20px;border-radius:22px;letter-spacing:1px;font-size:13px;
+  box-shadow:0 3px 10px rgba(196,72,0,.25);
+  transition:transform .15s ease,box-shadow .15s ease;
+}
+.back-btn:hover{transform:translateY(-2px);box-shadow:0 5px 14px rgba(196,72,0,.32)}
+.back-btn:active{transform:translateY(0)}
+
+@media(max-width:540px){
+  .stats{gap:8px}
+  .stat{min-width:72px}
+  .stat-n{font-size:18px}
+  thead th,td{padding:7px 7px;font-size:11.5px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<a href="./index.html" class="back-btn">← 返回作战简报</a>
+
+<!-- HEADER -->
+<div class="hd">
+  <div class="hd-guild">🛡️ 天晴行会</div>
+  <span class="hd-trophy">🏆</span>
+  <div class="hd-title">诺维京守城大捷</div>
+  <div class="hd-date">2026年8月08日 · 守城战 · 胜利公告</div>
+</div>
+
+<div class="body">
+
+  <!-- THANK YOU -->
+  <div class="ty">
+    <div class="opener">战后宣言<strong>我们守住了！🏰✨</strong></div>
+    <p>
+      ⚔️「攻城结束！今晚没玩互动，没搞话题接力，因为根本没空——对面全程没有放弃，但我们的城，一直在。
+      <strong>感谢每一个死守各个方位的兄弟，今晚这才是真实的天晴行会。守城成功！」</strong>
+    </p>
+    <p>
+      根据今晚实况颁发称号
+
+      元素之王 → 【永道阎王】
+      今晚原地挂脚本守在甬道口，一个人干掉18个，全场击杀榜第一。"四个角落全挂脚本，谁过去都得死。"
+    </p>
+    <p>
+      天晴 → 【守城令旗】
+      击杀榜第二，全图支援，还要上会长号批入会申请，一边守城一边处理行政，今晚最多线程的人。
+    </p>
+    <p>
+      西凉锦马超 → 【东北孤勇者】
+      东北方位反复被打出去又冲回来，独自扛天子数次，没有放弃过东北。
+    </p>
+    <p>
+      志明哥 → 【移动指挥官】
+      今晚一边开车导航一边守城，还把快被打空的守护者塔给修好了。全场最硬核操作。
+    </p>
+    <p>
+      玉皇大帝 → 【全图游侠】
+      哪里有人去哪里，东南西北全跑遍，把金刚葫芦土、清风叙旧等多人送走。
+    </p>
+    <p>
+      爆爆爆 → 【暗夜斥候】
+      最早看穿敌方战术——"他们乱窜，一下西南一下西北，感觉是来刷人头的"，全场第一个读懂对面意图的人。
+    </p>
+    <p>
+      缘定三生 → 【前线报信人】
+      多次在关键时刻通报敌方具体位置，帮队伍提前布防。
+    </p>
+    <p>
+      剑魂（毛哥号）→ 【半场救援】
+      中途才入场，进来就直接投入战斗，没有缺席最关键的下半段。
+    </p>
+    <p>
+      🌙「最后一个——今晚打了一个多小时，每个人在群里说一件今晚最想记住的事，一句话就好。我先来：[你的那句话]」<strong>感谢你们❤️</strong>
+    </p>
+    <p>
+    <div class="sig">—— 天晴行会 · 2026年8月08日 ——</div>
+  </div>
+
+</script>
+</body>
+</html>

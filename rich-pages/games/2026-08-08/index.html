@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>天晴行会攻城之夜 · 流程表</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0a0a0f;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      min-height: 100vh;
+      padding: 32px 16px 48px;
+      color: #e5e7eb;
+    }
+
+    .container {
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+    .header .icon { font-size: 40px; margin-bottom: 8px; }
+    .header h1 { font-size: 22px; font-weight: 800; color: #fff; letter-spacing: 2px; }
+    .header .sub { color: #6b7280; font-size: 13px; margin-top: 4px; }
+    .header .hint {
+      display: inline-block;
+      margin-top: 12px;
+      background: #1f2937;
+      border-radius: 999px;
+      padding: 4px 16px;
+      font-size: 12px;
+      color: #9ca3af;
+    }
+
+    /* Timeline */
+    .timeline {
+      position: relative;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 23px;
+      top: 0; bottom: 0;
+      width: 2px;
+      background: #374151;
+      z-index: 0;
+    }
+
+    .step {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Dot */
+    .dot {
+      flex-shrink: 0;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      border: 4px solid #0a0a0f;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      user-select: none;
+    }
+    .dot.done { background: #4b5563 !important; }
+
+    /* Card */
+    .card {
+      flex: 1;
+      border-radius: 14px;
+      border: 2px solid;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+      transition: opacity 0.3s;
+    }
+    .card.done { opacity: 0.45; }
+
+    .card-header {
+      padding: 12px 16px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .card-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .badge-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 4px;
+    }
+    .badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 999px;
+    }
+    .phase-label { font-size: 12px; font-weight: 600; }
+    .card-title { font-size: 16px; font-weight: 800; color: #1f2937; }
+    .arrow { color: #6b7280; font-size: 14px; transition: transform 0.2s; }
+
+    /* Card Body */
+    .card-body {
+      background: #fff;
+      padding: 16px;
+      display: none;
+    }
+    .card-body.open { display: block; }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: #9ca3af;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .actions { margin-bottom: 16px; }
+    .action-item {
+      display: flex;
+      gap: 8px;
+      font-size: 14px;
+      color: #374151;
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
+    .action-num { color: #9ca3af; font-weight: 700; flex-shrink: 0; }
+
+    .say-box {
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 12px;
+      font-size: 13px;
+      color: #374151;
+      line-height: 1.7;
+      white-space: pre-line;
+      margin-bottom: 16px;
+    }
+
+    .tips-box {
+      border-radius: 10px;
+      padding: 10px 12px;
+      border: 1px solid;
+      font-size: 12px;
+      color: #4b5563;
+      margin-bottom: 16px;
+      line-height: 1.6;
+    }
+
+    .done-btn {
+      width: 100%;
+      padding: 10px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .done-btn.is-done {
+      background: #e5e7eb;
+      color: #9ca3af;
+    }
+
+    /* Progress */
+    .progress-box {
+      margin-top: 32px;
+      background: #1f2937;
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+    }
+    .progress-label { font-size: 14px; color: #9ca3af; margin-bottom: 12px; }
+    .progress-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+    .progress-dot {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #374151;
+      color: #6b7280;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      transition: all 0.3s;
+    }
+    .progress-dot.done {
+      background: #22c55e;
+      color: #fff;
+      font-size: 14px;
+    }
+    .progress-count { font-size: 12px; color: #6b7280; }
+
+    .footer {
+      text-align: center;
+      margin-top: 16px;
+      font-size: 12px;
+      color: #374151;
+    }
+
+    /* Color themes */
+    .theme-purple .dot-el  { background: #a78bfa; }
+    .theme-purple .card     { border-color: #a78bfa; }
+    .theme-purple .card-header { background: #f5f3ff; }
+    .theme-purple .badge    { background: #ede9fe; color: #6d28d9; }
+    .theme-purple .phase-label { color: #7c3aed; }
+    .theme-purple .tips-box { background: #f5f3ff; border-color: #a78bfa; }
+    .theme-purple .done-btn { background: #a78bfa; color: #fff; }
+
+    .theme-orange .dot-el  { background: #fb923c; }
+    .theme-orange .card     { border-color: #fb923c; }
+    .theme-orange .card-header { background: #fff7ed; }
+    .theme-orange .badge    { background: #ffedd5; color: #c2410c; }
+    .theme-orange .phase-label { color: #ea580c; }
+    .theme-orange .tips-box { background: #fff7ed; border-color: #fb923c; }
+    .theme-orange .done-btn { background: #fb923c; color: #fff; }
+
+    .theme-red .dot-el  { background: #f87171; }
+    .theme-red .card     { border-color: #f87171; }
+    .theme-red .card-header { background: #fef2f2; }
+    .theme-red .badge    { background: #fee2e2; color: #b91c1c; }
+    .theme-red .phase-label { color: #dc2626; }
+    .theme-red .tips-box { background: #fef2f2; border-color: #f87171; }
+    .theme-red .done-btn { background: #f87171; color: #fff; }
+
+    .theme-blue .dot-el  { background: #60a5fa; }
+    .theme-blue .card     { border-color: #60a5fa; }
+    .theme-blue .card-header { background: #eff6ff; }
+    .theme-blue .badge    { background: #dbeafe; color: #1d4ed8; }
+    .theme-blue .phase-label { color: #2563eb; }
+    .theme-blue .tips-box { background: #eff6ff; border-color: #60a5fa; }
+    .theme-blue .done-btn { background: #60a5fa; color: #fff; }
+
+    .theme-yellow .dot-el  { background: #facc15; }
+    .theme-yellow .card     { border-color: #facc15; }
+    .theme-yellow .card-header { background: #fefce8; }
+    .theme-yellow .badge    { background: #fef9c3; color: #a16207; }
+    .theme-yellow .phase-label { color: #ca8a04; }
+    .theme-yellow .tips-box { background: #fefce8; border-color: #facc15; }
+    .theme-yellow .done-btn { background: #facc15; color: #78350f; }
+
+    .theme-green .dot-el  { background: #4ade80; }
+    .theme-green .card     { border-color: #4ade80; }
+    .theme-green .card-header { background: #f0fdf4; }
+    .theme-green .badge    { background: #dcfce7; color: #15803d; }
+    .theme-green .phase-label { color: #16a34a; }
+    .theme-green .tips-box { background: #f0fdf4; border-color: #4ade80; }
+    .theme-green .done-btn { background: #4ade80; color: #14532d; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <div class="icon">⚔️</div>
+    <h1>天晴行会攻城之夜</h1>
+    <div class="sub">完整流程表 · 会长专用</div>
+    <div class="hint">点击每个环节展开详情 · 左侧图标勾选完成</div>
+  </div>
+
+  <div class="timeline" id="timeline"></div>
+
+  <div class="progress-box">
+    <div class="progress-label">今晚进度</div>
+    <div class="progress-dots" id="progressDots"></div>
+    <div class="progress-count" id="progressCount">0 / 6 已完成</div>
+  </div>
+
+  <div class="footer">今晚攻城大吉 ⚔️ 天晴行会必胜</div>
+</div>
+
+<script>
+const steps = [
+  {
+    id: "s0", theme: "purple", emoji: "📣",
+    tag: "环节 01", phase: "开战前 30min", title: "战前宣言",
+    actions: [
+      "发出接龙格式到群里，自己带头示范第一条",
+      "等大家接龙期间，@一些平时活跃的人催催",
+      "宣言差不多了就截图发一次，仪式感拉满"
+    ],
+    say: `📣「攻城前最后准备——战前宣言接龙开始！会长打头阵，大家跟上！↓↓」`,
+    tips: "宣言不够也没关系，3-5人就够气氛了"
+  },
+  {
+    id: "s1", theme: "orange", emoji: "🎤",
+    tag: "环节 03", phase: "开战前 5min", title: "实况解说开场",
+    actions: [
+      "确认人都到齐，开始你的开场白",
+      "介绍今晚三个重点：实况解说 / 截图赛 / 颁奖典礼",
+      "喊一声出发口令，正式开始"
+    ],
+    say: `🎤「好！各位战友注意——天晴行会今晚攻城正式开始！我是实况解说[你名字]，今晚全程陪大家见证这场载入行会史册的夜战！截图赛、颁奖、话题接力都安排上了——出发！」`,
+    tips: "说完马上出发，不要拖，气氛在最高点别浪费"
+  },
+  {
+    id: "s2", theme: "red", emoji: "⚔️",
+    tag: "环节 03 & 05", phase: "攻城中 · 全程", title: "实况解说 + 截图赛",
+    actions: [
+      "持续给战场画面做解说，冲锋时喊、翻车时调侃、僵持时鼓励",
+      "看到名场面马上提醒全员截图",
+      "截图发攻城群，你在群里汇总（会长角色）"
+    ],
+    say: `📸「名场面！！[某某]那个操作赶紧截图！发群里！截图赛素材来了！」\n\n💀「[某某]倒下了——英勇就义！让我们向这位勇士致以崇高的敬意……不过你死得真的有点快。」`,
+    tips: "解说不用一直说，关键时刻喊一句就够，平时留给大家自己玩"
+  },
+  {
+    id: "s3", theme: "blue", emoji: "💬",
+    tag: "环节 04", phase: "攻城中 · 等待时", title: "话题接力",
+    actions: [
+      "感知到群里安静 / 有人在等复活，马上抛一张话题卡",
+      "先念出题目，点一个人来回答",
+      "有人聊嗨了不要打断，跟着聊比完成话题更重要"
+    ],
+    say: `「好，趁[某某]复活的空档，我们来聊个话题——」\n\n👉 推荐先用：\n· 你是怎么被拉进这个游戏的？\n· 今晚你最想感谢的队友是谁？不用说名字，描述一下让大家猜\n· 行会里谁是暗藏实力型选手？`,
+    tips: "话题卡备着5-8张，用不完没关系，能让等待时间不冷场就赢了"
+  },
+  {
+    id: "s4", theme: "yellow", emoji: "🏆",
+    tag: "环节 02", phase: "攻城结束后 5min", title: "趣味颁奖",
+    actions: [
+      "发出奖项投票（直接发文字让大家回复，或者发接龙）",
+      "等大家投完，你来宣布结果念获奖感言",
+      "可以让获奖者发一段语音领奖，笑点会在这里"
+    ],
+    say: `🏆「城战结束！现在进入今晚最重磅环节——天晴行会趣味颁奖典礼！奖项如下，投票给你心目中的人，可以投多个↓↓」\n\n胜利时加：「今晚打得漂亮，但颁奖环节一样不能少——」\n失败时加：「城没拿下，但奖一定要发，今晚每个人都值得被记住——」`,
+    tips: "失败的情况下颁奖环节更重要，能把情绪从低谷拉回来"
+  },
+  {
+    id: "s5", theme: "green", emoji: "🌙",
+    tag: "环节 06", phase: "收尾", title: "战后一句话",
+    actions: [
+      "发引导语到群里，自己第一个打出你的一句话",
+      "等大家陆续发出来，不用催，温度到了大家自然会说",
+      "最后你发一句正式收队语结束"
+    ],
+    say: `🌙「最后一个环节——今晚每个人打一句话在群里，说一件你最想记住的事。一个人、一个瞬间、一句话都行，随心就好。我先来：[你的那句话]」\n\n收队语：「好，今晚到这里！下次攻城继续！大家注意休息——晚安⚔️」`,
+    tips: "你自己那句话要真诚，其他人会被你带动"
+  }
+];
+
+const doneState = {};
+
+function updateProgress() {
+  const count = Object.values(doneState).filter(Boolean).length;
+  document.getElementById("progressCount").textContent = `${count} / ${steps.length} 已完成`;
+  steps.forEach(s => {
+    const dot = document.getElementById("pdot-" + s.id);
+    if (dot) {
+      if (doneState[s.id]) {
+        dot.classList.add("done");
+        dot.textContent = "✓";
+      } else {
+        dot.classList.remove("done");
+        dot.textContent = s.emoji;
+      }
+    }
+  });
+}
+
+function toggleDone(id) {
+  doneState[id] = !doneState[id];
+  const card = document.getElementById("card-" + id);
+  const dotEl = document.getElementById("dot-" + id);
+  const btnEl = document.getElementById("btn-" + id);
+  if (doneState[id]) {
+    card.classList.add("done");
+    dotEl.textContent = "✅";
+    dotEl.classList.add("done");
+    btnEl.textContent = "↩ 撤销完成";
+    btnEl.classList.add("is-done");
+  } else {
+    card.classList.remove("done");
+    const step = steps.find(s => s.id === id);
+    dotEl.textContent = step.emoji;
+    dotEl.classList.remove("done");
+    btnEl.textContent = "✅ 标记此环节已完成";
+    btnEl.classList.remove("is-done");
+  }
+  updateProgress();
+}
+
+function toggleExpand(id) {
+  const body = document.getElementById("body-" + id);
+  const arrow = document.getElementById("arrow-" + id);
+  const isOpen = body.classList.contains("open");
+  // close all
+  document.querySelectorAll(".card-body").forEach(b => b.classList.remove("open"));
+  document.querySelectorAll(".arrow").forEach(a => a.textContent = "▼");
+  if (!isOpen) {
+    body.classList.add("open");
+    arrow.textContent = "▲";
+  }
+}
+
+function buildUI() {
+  const timeline = document.getElementById("timeline");
+  const progressDots = document.getElementById("progressDots");
+
+  steps.forEach(step => {
+    // Progress dot
+    const pdot = document.createElement("div");
+    pdot.className = "progress-dot";
+    pdot.id = "pdot-" + step.id;
+    pdot.textContent = step.emoji;
+    progressDots.appendChild(pdot);
+
+    // Step
+    const stepEl = document.createElement("div");
+    stepEl.className = `step theme-${step.theme}`;
+
+    stepEl.innerHTML = `
+      <div>
+        <div class="dot dot-el theme-${step.theme}" id="dot-${step.id}" 
+             onclick="toggleDone('${step.id}')" title="点击标记完成">
+          ${step.emoji}
+        </div>
+      </div>
+      <div class="card theme-${step.theme}" id="card-${step.id}">
+        <div class="card-header theme-${step.theme}" onclick="toggleExpand('${step.id}')">
+          <div class="card-header-row">
+            <div>
+              <div class="badge-row">
+                <span class="badge theme-${step.theme}">${step.tag}</span>
+                <span class="phase-label theme-${step.theme}">${step.phase}</span>
+              </div>
+              <div class="card-title">${step.title}</div>
+            </div>
+            <div class="arrow" id="arrow-${step.id}">▼</div>
+          </div>
+        </div>
+        <div class="card-body" id="body-${step.id}">
+          <div class="actions">
+            <div class="section-label">📋 你需要做的</div>
+            ${step.actions.map((a, i) => `
+              <div class="action-item">
+                <span class="action-num">${i+1}.</span>
+                <span>${a}</span>
+              </div>
+            `).join("")}
+          </div>
+          <div class="section-label">💬 参考话术</div>
+          <div class="say-box">${step.say.replace(/</g,"&lt;").replace(/>/g,"&gt;")}</div>
+          <div class="tips-box theme-${step.theme}">
+            <strong>💡 小提示：</strong>${step.tips}
+          </div>
+          <button class="done-btn theme-${step.theme}" id="btn-${step.id}"
+                  onclick="toggleDone('${step.id}')">
+            ✅ 标记此环节已完成
+          </button>
+        </div>
+      </div>
+    `;
+
+    timeline.appendChild(stepEl);
+  });
+
+  updateProgress();
+}
+
+buildUI();
+</script>
+</body>
+</html>
